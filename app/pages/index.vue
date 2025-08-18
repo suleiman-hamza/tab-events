@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { AccordionItem } from '@nuxt/ui'
 
+definePageMeta({
+  layout: 'auth',
+})
+
 const items = ref<AccordionItem[]>([
   {
     label: 'Icons',
