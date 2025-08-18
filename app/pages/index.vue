@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import * as z from 'zod'
-import type { FormSubmitEvent, TabsItem } from '@nuxt/ui'
+import type { FormSubmitEvent } from '@nuxt/ui'
+
+type MyTabsItem = {
+  label: string;
+  slot: string;
+  description: string;
+  content: string;
+  title: string;
+};
 
 definePageMeta({
   layout: "auth"
@@ -9,28 +17,32 @@ const loading = ref(false)
 
 const schema = z.object({
   email: z.email('Invalid email address').min(1, 'Email is required'),
-  password: z.string().min(8, 'Must be at least 8 characters')
+  password: z.string().min(8, 'Must be at least 8 characters'),
+  name: z.string().optional(),
 })
 
 type Schema = z.output<typeof schema>
 
 const state = reactive<Partial<Schema>>({
   email: undefined,
-  password: undefined
+  password: undefined,
+  name: undefined,
 })
 
-const items = ref<TabsItem[]>([
+const items = ref<MyTabsItem[]>([
   {
     label: 'Sign in',
-    slot: 'signin',
-    icon: 'i-lucide-user',
-    content: 'This is the User Sign in content.'
+    slot: 'signin' as const,
+    description: 'Enter your credentials to access your account.',
+    content: 'This is the User Sign in content.',
+    title: 'Login'
   },
   {
     label: 'Sign up',
-    slot: 'signin',
-    icon: 'i-lucide-user',
-    content: 'This is the User Sign up content.'
+    slot: 'signup' as const,
+    description: 'Create an account to access your account.',
+    content: 'This is the User Sign up content.',
+    title: 'Sign up'
   }
 ])
 
@@ -46,7 +58,7 @@ async function onSignIn(payload: FormSubmitEvent<Schema>) {
     //     title: 'Successfully signed in',
     //     color: 'success',
     //   })
-      
+
     //   await fetchOrganizations()
     //   await navigateTo('/app/user')
     // } else {
@@ -68,10 +80,10 @@ async function onSignIn(payload: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <div class="border flex flex-col items-center justify-center gap-4 p-4">
-    <div class="border border-amber-600 flex items-center justify-center gap-2">
+  <div class="flex flex-col items-center justify-center gap-4 p-4">
+    <div class="flex items-center justify-center gap-2 mt-4 mb-4">
       <UIcon name="i-lucide-lightbulb" class="size-5" />
-      <span class="text-amber-600 font-bold text-2xl">App Slot</span>
+      <span class="text-amber-600 font-bold text-2xl">App Logo</span>
     </div>
 
     <section class="relative p-4 border border-gray-300">
@@ -81,25 +93,44 @@ async function onSignIn(payload: FormSubmitEvent<Schema>) {
       <span class="cross absolute -left-px -top-px size-px" />
       <span class="cross absolute -right-px -top-px size-px" />
       <!--crossed div-->
-      <UTabs color="neutral" variant="link" :items="items">
-        <template #signin>
-          <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSignIn">
+      <UTabs color="neutral" variant="link" :items class="">
+        <template #signin="{ item }">
+          <h3 class="text-2xl font-bold mt-4 mb-2">{{ item.title }}</h3>
+          <p class="text-muted mb-4">
+            {{ item.description }}
+          </p>
+
+          <UForm :state="state" class="flex flex-col gap-4">
             <UFormField label="Email" name="email">
-              <UInput v-model="state.email" />
+              <UInput v-model="state.email" class="w-full !rounded-none ring-0 shadow-none inset-ring-0" trailing-icon="i-lucide-at-sign" placeholder="Enter your email" />
+            </UFormField>
+            <UFormField label="password" name="password">
+              <UInput v-model="state.password" type="password" class="w-full !rounded-none" trailing-icon="i-lucide-lock" placeholder="Enter your password"/>
             </UFormField>
 
-            <UFormField label="Password" name="password">
-              <UInput v-model="state.password" type="password" />
-            </UFormField>
-
-            <UButton type="submit">
-              Submit
-            </UButton>
+            <UButton label="Continue" color="neutral" type="submit" variant="solid" class="w-full rounded-none flex items-center justify-center" />
           </UForm>
         </template>
 
-        <template #signup>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam molestias fugit dolorem architecto esse eius ea optio tempore atque eum voluptatum laudantium hic iste odit, assumenda, doloribus sequi vero explicabo!</p>
+        <template #signup="{ item }">
+          <h3 class="text-2xl font-bold mt-4 mb-2">{{ item.title }}</h3>
+          <p class="text-muted mb-4">
+            {{ item.description }}
+          </p>
+
+          <UForm :state="state" class="flex flex-col gap-4">
+            <UFormField label="Email" name="email">
+              <UInput v-model="state.email" class="w-full !rounded-none" trailing-icon="i-lucide-at-sign" placeholder="Enter your email" />
+            </UFormField>
+            <UFormField label="password" name="password">
+              <UInput v-model="state.password" type="password" class="w-full !rounded-none border-0" trailing-icon="i-lucide-lock" placeholder="Enter your password" />
+            </UFormField>
+            <UFormField label="Name" name="name">
+              <UInput v-model="state.name" class="w-full rounded-none border-0" trailing-icon="i-lucide-at-profile" placeholder="Enter Fullname" />
+            </UFormField>
+
+            <UButton label="Continue" color="neutral" type="submit" variant="solid" class="w-full flex items-center justify-center rounded-none" />
+          </UForm>
         </template>
       </UTabs>
     </section>
