@@ -24,7 +24,7 @@ const links = [
 </script>
 
 <template>
-    <USeparator icon="i-simple-icons-nuxtdotjs" type="dashed" class="h-px" />
+    <USeparator icon="i-simple-icons-nuxtdotjs" type="dashed" class="h-px mb-4" />
     <footer class="flex flex-col-reverse items-center justify-center sm:flex-row gap-4 p-4">
         <div class="">
             <p class="text-muted text-sm">
