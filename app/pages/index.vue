@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
+import * as z from 'zod'
 
-type MyTabsItem = {
-  label: string;
-  slot: string;
-  description: string;
-  content: string;
-  title: string;
-};
+interface MyTabsItem {
+  label: string
+  slot: string
+  description: string
+  content: string
+  title: string
+}
 
 definePageMeta({
-  layout: "auth"
+  layout: 'auth',
 })
 const loading = ref(false)
 
@@ -35,15 +35,15 @@ const items = ref<MyTabsItem[]>([
     slot: 'signin' as const,
     description: 'Enter your credentials to access your account.',
     content: 'This is the User Sign in content.',
-    title: 'Login'
+    title: 'Login',
   },
   {
     label: 'Sign up',
     slot: 'signup' as const,
     description: 'Create an account to access your account.',
     content: 'This is the User Sign up content.',
-    title: 'Sign up'
-  }
+    title: 'Sign up',
+  },
 ])
 
 async function onSignIn(payload: FormSubmitEvent<Schema>) {
@@ -67,16 +67,17 @@ async function onSignIn(payload: FormSubmitEvent<Schema>) {
     //     color: 'error',
     //   })
     // }
-  } catch (error: any) {
+  }
+  catch (error: any) {
     // toast.add({
     //   title: error.message,
     //   color: 'error',
     // })
-  } finally {
+  }
+  finally {
     loading.value = false
   }
 }
-
 </script>
 
 <template>
@@ -87,15 +88,17 @@ async function onSignIn(payload: FormSubmitEvent<Schema>) {
     </div>
 
     <section class="relative p-4 border border-gray-300">
-      <!--crossed div-->
+      <!-- crossed div -->
       <span class="cross absolute -bottom-px -left-px size-px" />
       <span class="cross absolute -bottom-px -right-px size-px" />
       <span class="cross absolute -left-px -top-px size-px" />
       <span class="cross absolute -right-px -top-px size-px" />
-      <!--crossed div-->
+      <!-- crossed div -->
       <UTabs color="neutral" variant="link" :items class="">
         <template #signin="{ item }">
-          <h3 class="text-2xl font-bold mt-4 mb-2">{{ item.title }}</h3>
+          <h3 class="text-2xl font-bold mt-4 mb-2">
+            {{ item.title }}
+          </h3>
           <p class="text-muted mb-4">
             {{ item.description }}
           </p>
@@ -105,7 +108,7 @@ async function onSignIn(payload: FormSubmitEvent<Schema>) {
               <UInput v-model="state.email" class="w-full !rounded-none ring-0 shadow-none inset-ring-0" trailing-icon="i-lucide-at-sign" placeholder="Enter your email" />
             </UFormField>
             <UFormField label="password" name="password">
-              <UInput v-model="state.password" type="password" class="w-full !rounded-none" trailing-icon="i-lucide-lock" placeholder="Enter your password"/>
+              <UInput v-model="state.password" type="password" class="w-full !rounded-none" trailing-icon="i-lucide-lock" placeholder="Enter your password" />
             </UFormField>
 
             <UButton label="Continue" color="neutral" type="submit" variant="solid" class="w-full rounded-none flex items-center justify-center" />
@@ -113,7 +116,9 @@ async function onSignIn(payload: FormSubmitEvent<Schema>) {
         </template>
 
         <template #signup="{ item }">
-          <h3 class="text-2xl font-bold mt-4 mb-2">{{ item.title }}</h3>
+          <h3 class="text-2xl font-bold mt-4 mb-2">
+            {{ item.title }}
+          </h3>
           <p class="text-muted mb-4">
             {{ item.description }}
           </p>
