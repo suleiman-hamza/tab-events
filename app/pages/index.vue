@@ -15,12 +15,12 @@ interface MyTabsItem {
 definePageMeta({
   layout: 'auth',
 })
-const loading = ref(false)
+const loading = ref(false);
 
 const schema = z.object({
   email: z.email('Invalid email address').min(1, 'Email is required'),
   password: z.string().min(8, 'Must be at least 8 characters'),
-  name: z.string().optional(),
+  name: z.string(),
 })
 
 type Schema = z.output<typeof schema>
@@ -48,42 +48,23 @@ const items = ref<MyTabsItem[]>([
   },
 ])
 
-async function onSignIn(payload: FormSubmitEvent<Schema>) {
+async function onSignUp(payload: FormSubmitEvent<Schema>) {
   try {
-    loading.value = true
-    // const { data, error } = await auth.signIn.email({
-    //   email: payload.data.email,
-    //   password: payload.data.password,
-    // })
-    // if (data) {
+    loading.value = true;
+    console.log(loading.value, 'loading');
+
+    const { data, error } = await auth.signUp.email({
+      email: payload.data?.email,
+      password: payload.data?.password,
+      name: payload.data?.name
+    })
+
+    console.log('data', data, 'error', error)
+    //  if (data) {
     //   toast.add({
     //     title: 'Successfully signed in',
     //     color: 'success',
     //   })
-
-    //   await fetchOrganizations()
-    //   await navigateTo('/app/user')
-    // } else {
-    //   toast.add({
-    //     title: error.message,
-    //     color: 'error',
-    //   })
-    // }
-  }
-  catch (error: any) {
-    // toast.add({
-    //   title: error.message,
-    //   color: 'error',
-    // })
-  }
-  finally {
-    loading.value = false
-  }
-}
-
-async function onSignUp(payload: FormSubmitEvent<Schema>) {
-  try {
-    loading.value = true;
 
   } catch (error: any) {
     // toast.add({
@@ -91,7 +72,8 @@ async function onSignUp(payload: FormSubmitEvent<Schema>) {
       //   color: 'error',
       // })
   } finally {
-    loading.value = false
+    loading.value = false;
+    console.log(loading.value, 'loading');
   }
 }
 </script>
@@ -139,7 +121,7 @@ async function onSignUp(payload: FormSubmitEvent<Schema>) {
             {{ item.description }}
           </p>
 
-          <UForm :state="state" class="flex flex-col gap-4">
+          <UForm :state="state" class="flex flex-col gap-4" @submit="onSignUp">
             <UFormField label="Email" name="email">
               <UInput v-model="state.email" class="w-full !rounded-none" trailing-icon="i-lucide-at-sign" placeholder="Enter your email" />
             </UFormField>
@@ -150,7 +132,7 @@ async function onSignUp(payload: FormSubmitEvent<Schema>) {
               <UInput v-model="state.name" class="w-full rounded-none border-0" trailing-icon="i-lucide-at-profile" placeholder="Enter Fullname" />
             </UFormField>
 
-            <UButton label="Continue" color="neutral" type="submit" variant="solid" class="w-full flex items-center justify-center rounded-none" />
+            <UButton label="Continue" color="neutral" type="submit" :loading-auto="loading" variant="solid" class="w-full flex items-center justify-center rounded-none" />
           </UForm>
         </template>
       </UTabs>
