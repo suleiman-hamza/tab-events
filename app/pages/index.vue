@@ -2,6 +2,8 @@
 import type { FormSubmitEvent } from '@nuxt/ui'
 import * as z from 'zod'
 
+const auth = useAuth();
+
 interface MyTabsItem {
   label: string
   slot: string
@@ -75,6 +77,20 @@ async function onSignIn(payload: FormSubmitEvent<Schema>) {
     // })
   }
   finally {
+    loading.value = false
+  }
+}
+
+async function onSignUp(payload: FormSubmitEvent<Schema>) {
+  try {
+    loading.value = true;
+
+  } catch (error: any) {
+    // toast.add({
+      //   title: error.message,
+      //   color: 'error',
+      // })
+  } finally {
     loading.value = false
   }
 }
