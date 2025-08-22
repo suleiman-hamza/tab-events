@@ -1,25 +1,20 @@
 import { betterAuth } from 'better-auth'
-import { organization, admin } from 'better-auth/plugins'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
+import { organization } from 'better-auth/plugins'
+import { schema } from '../database/schema/auth' // your schema definition;
 import { db } from '../utils/drizzle' // your drizzle instance
-import { user, session, account, verification } from "../database/schema/auth" // your schema definition;
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: 'sqlite', // or "mysql", "sqlite"
-    schema: {
-      user,
-      session,
-      account,
-      verification
-    }
+    schema: schema,
   }),
   emailAndPassword: {
     enabled: true,
   },
   session: {
-        disableSessionRefresh: true
-    },
+    disableSessionRefresh: true,
+  },
 
-  plugins: []
+  plugins: [organization()],
 })

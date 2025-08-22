@@ -18,7 +18,7 @@ export default defineNuxtConfig({
   },
   nitro: {
     experimental: {
-      asyncContext: true
+      asyncContext: true,
     },
     // routeRules: {
     //   '/app/**': {

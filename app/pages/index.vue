@@ -3,7 +3,7 @@ import type { FormSubmitEvent } from '@nuxt/ui'
 import * as z from 'zod'
 
 // import { authClient } from '~/plugins/auth.client'
-const auth = useAuth();
+const auth = useAuth()
 
 interface MyTabsItem {
   label: string
@@ -17,8 +17,8 @@ definePageMeta({
   layout: 'auth',
 })
 
-const toast = useToast();
-const loading = ref(false);
+const toast = useToast()
+const loading = ref(false)
 
 const schema = z.object({
   email: z.email('Invalid email address').min(1, 'Email is required'),
@@ -53,13 +53,13 @@ const items = ref<MyTabsItem[]>([
 
 async function onSignUp(payload: FormSubmitEvent<Schema>) {
   try {
-    loading.value = true;
-    console.log(loading.value, 'loading');
+    loading.value = true
+    console.log(loading.value, 'loading')
 
     const { data, error } = await auth.client.signUp.email({
       email: payload.data?.email,
       password: payload.data?.password,
-      name: payload.data?.name
+      name: payload.data?.name,
     })
 
     console.log('data', data, 'error', error)
@@ -69,52 +69,54 @@ async function onSignUp(payload: FormSubmitEvent<Schema>) {
         color: 'success',
       })
     }
-
-  } catch (error: any) {
+  }
+  catch (error: any) {
     toast.add({
       title: error.message,
       color: 'error',
     })
-  } finally {
-    loading.value = false;
-    console.log(loading.value, 'loading');
+  }
+  finally {
+    loading.value = false
+    console.log(loading.value, 'loading')
   }
 }
 
 async function onSignIn(payload: FormSubmitEvent<Schema>) {
   try {
-    loading.value = true;
+    loading.value = true
     const { data, error } = await auth.client.signIn.email({
       email: payload.data?.email,
-      password: payload.data?.password
+      password: payload.data?.password,
     })
 
     if (data) {
       toast.add({
-        title: "Successfully signed in",
-        description: "lorem ipsum dolor",
+        title: 'Successfully signed in',
+        description: 'lorem ipsum dolor',
         color: 'success',
       })
-    } else {
+    }
+    else {
       toast.add({
         title: error.message,
         color: 'error',
       })
     };
 
-    await auth.fetchSession();
+    await auth.fetchSession()
     await navigateTo('/onboarding')
-
-  } catch (error: any) {
+  }
+  catch (error: any) {
     toast.add({
-        title: error.message,
-        color: 'error',
-      })
-  } finally {
-    loading.value = false;
+      title: error.message,
+      color: 'error',
+    })
+  }
+  finally {
+    loading.value = false
   }
 }
-
 </script>
 
 <template>
@@ -142,16 +144,22 @@ async function onSignIn(payload: FormSubmitEvent<Schema>) {
 
           <UForm :state="state" class="flex flex-col gap-4" @submit="onSignIn">
             <UFormField label="Email" name="email">
-              <UInput v-model="state.email" class="w-full !rounded-none ring-0 shadow-none inset-ring-0"
-                trailing-icon="i-lucide-at-sign" placeholder="Enter your email" />
+              <UInput
+                v-model="state.email" class="w-full !rounded-none ring-0 shadow-none inset-ring-0"
+                trailing-icon="i-lucide-at-sign" placeholder="Enter your email"
+              />
             </UFormField>
             <UFormField label="password" name="password">
-              <UInput v-model="state.password" type="password" class="w-full !rounded-none"
-                trailing-icon="i-lucide-lock" placeholder="Enter your password" />
+              <UInput
+                v-model="state.password" type="password" class="w-full !rounded-none"
+                trailing-icon="i-lucide-lock" placeholder="Enter your password"
+              />
             </UFormField>
 
-            <UButton label="Continue" color="neutral" type="submit" :loading-auto="loading" variant="solid"
-              class="w-full rounded-none flex items-center justify-center" />
+            <UButton
+              label="Continue" color="neutral" type="submit" :loading-auto="loading" variant="solid"
+              class="w-full rounded-none flex items-center justify-center"
+            />
           </UForm>
         </template>
 
@@ -165,20 +173,28 @@ async function onSignIn(payload: FormSubmitEvent<Schema>) {
 
           <UForm :state="state" class="flex flex-col gap-4" @submit="onSignUp">
             <UFormField label="Email" name="email">
-              <UInput v-model="state.email" class="w-full !rounded-none" trailing-icon="i-lucide-at-sign"
-                placeholder="Enter your email" />
+              <UInput
+                v-model="state.email" class="w-full !rounded-none" trailing-icon="i-lucide-at-sign"
+                placeholder="Enter your email"
+              />
             </UFormField>
             <UFormField label="password" name="password">
-              <UInput v-model="state.password" type="password" class="w-full !rounded-none border-0"
-                trailing-icon="i-lucide-lock" placeholder="Enter your password" />
+              <UInput
+                v-model="state.password" type="password" class="w-full !rounded-none border-0"
+                trailing-icon="i-lucide-lock" placeholder="Enter your password"
+              />
             </UFormField>
             <UFormField label="Name" name="name">
-              <UInput v-model="state.name" class="w-full rounded-none border-0" trailing-icon="i-lucide-at-profile"
-                placeholder="Enter Fullname" />
+              <UInput
+                v-model="state.name" class="w-full rounded-none border-0" trailing-icon="i-lucide-at-profile"
+                placeholder="Enter Fullname"
+              />
             </UFormField>
 
-            <UButton label="Continue" color="neutral" type="submit" :loading-auto="loading" variant="solid"
-              class="w-full flex items-center justify-center rounded-none" />
+            <UButton
+              label="Continue" color="neutral" type="submit" :loading-auto="loading" variant="solid"
+              class="w-full flex items-center justify-center rounded-none"
+            />
           </UForm>
         </template>
       </UTabs>

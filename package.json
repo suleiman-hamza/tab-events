@@ -11,6 +11,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "auth:schema": "npx @better-auth/cli generate --config server/utils/auth.ts --output server/database/schema/auth.ts -y && eslint . --fix",
+    "auth:migrate": "npx @better-auth/cli migrate --config server/utils/auth.ts",
     "db:generate": "drizzle-kit generate --config ./server/database/drizzle.config.ts",
     "db:migrate": "drizzle-kit migrate --config ./server/database/drizzle.config.ts",
     "db:push": "drizzle-kit push --config ./server/database/drizzle.config.ts",

@@ -1,25 +1,28 @@
-import { createAuthClient } from 'better-auth/client';
-import type { InferSessionFromClient, InferUserFromClient, ClientOptions } from 'better-auth/client'
-
+import type { ClientOptions, InferSessionFromClient, InferUserFromClient } from 'better-auth/client'
+import { createAuthClient } from 'better-auth/client'
+import { organizationClient } from 'better-auth/client/plugins'
 
 export function useAuth() {
-    const url = useRequestURL();
-    const headers = import.meta.server ? useRequestHeaders() : undefined;
+  const url = useRequestURL()
+  const headers = import.meta.server ? useRequestHeaders() : undefined
 
-    const client = createAuthClient({
-        baseURL: url.origin,
-        fetchOptions: {
-            headers,
-        },
-        // client side plugins can be added here
-        plugins: [],
-    })
-    const session = useState<InferSessionFromClient<ClientOptions> | null>('auth:session', () => null)
-    const user = useState<InferUserFromClient<ClientOptions> | null>('auth:user', () => null)
-    const sessionFetching = import.meta.server ? ref(false) : useState('auth:sessionFetching', () => false)
+  const client = createAuthClient({
+    baseURL: url.origin,
+    fetchOptions: {
+      headers,
+    },
+    // client side plugins can be added here
+    plugins: [
+      organizationClient(),
+    ],
+  })
+  const session = useState<InferSessionFromClient<ClientOptions> | null>('auth:session', () => null)
+  const user = useState<InferUserFromClient<ClientOptions> | null>('auth:user', () => null)
+  const sessionFetching = import.meta.server ? ref(false) : useState('auth:sessionFetching', () => false)
 
-    const fetchSession = async () => {
-    if (sessionFetching.value) return
+  const fetchSession = async () => {
+    if (sessionFetching.value)
+      return
     sessionFetching.value = true
     try {
       const { data } = await client.getSession({
@@ -30,11 +33,13 @@ export function useAuth() {
       session.value = data?.session || null
       user.value = data?.user || null
       return data
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Error fetching session:', error)
       session.value = null
       user.value = null
-    } finally {
+    }
+    finally {
       sessionFetching.value = false
     }
   }
@@ -46,14 +51,14 @@ export function useAuth() {
   //   })
   // }
 
-    return {
-        client,
-        signIn: client.signIn,
-        signUp: client.signUp,
-        session,
-        sessionFetching,
-        user,
-        fetchSession,
-        loggedIn: computed(() => !!session.value),
-    }
+  return {
+    client,
+    signIn: client.signIn,
+    signUp: client.signUp,
+    session,
+    sessionFetching,
+    user,
+    fetchSession,
+    loggedIn: computed(() => !!session.value),
+  }
 }

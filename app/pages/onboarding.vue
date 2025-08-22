@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { FormSubmitEvent } from '@nuxt/ui'
 import * as z from 'zod'
-const router = useRouter();
-const auth = useAuth();
-const { user } = useAuth();
+
+const router = useRouter()
+const auth = useAuth()
+const { user } = useAuth()
 
 onMounted(() => {
   if (user.value?.name && !state.name) {
@@ -12,7 +12,7 @@ onMounted(() => {
 })
 definePageMeta({
   middleware: ['auth'],
-  layout: 'auth'
+  layout: 'auth',
 })
 
 // const { createTeam, isLoading } = useOrgs()
@@ -27,7 +27,7 @@ type Schema = z.output<typeof schema>
 
 const state = reactive<Partial<Schema>>({
   name: undefined,
-  slug: undefined
+  slug: undefined,
 })
 
 watch(() => state.name, (newName) => {
@@ -44,17 +44,16 @@ async function signOut() {
   await auth.client.signOut({
     fetchOptions: {
       onSuccess: () => {
-        router.push("/"); // redirect to login page
+        router.push('/') // redirect to login page
       },
     },
-  });
+  })
 }
 </script>
 
 <template>
   <main>
-    
-      <!-- <UButton color="neutral" type="button" @click="signOut" loading-auto variant="outline"
+    <!-- <UButton color="neutral" type="button" @click="signOut" loading-auto variant="outline"
         class="w-full rounded-none flex items-center justify-center">
         Sign out
       </UButton> -->
@@ -62,7 +61,7 @@ async function signOut() {
     <div class="flex-1 flex flex-col items-center justify-center gap-4 p-4">
       <section class="relative w-full max-w-md bg-muted/20 border p-6">
         <div class="text-center border  mb-4">
-          <span class="block w-20 h-20 border mx-auto mb-4"></span>
+          <span class="block w-20 h-20 border mx-auto mb-4" />
           <h1 class="text-2xl font-bold">
             Welcome to the app!
           </h1>
@@ -80,21 +79,20 @@ async function signOut() {
             <UInput v-model="state.slug" class="w-full" placeholder="e.g. my-awesome-team" />
 
             This will be used in URLs and must be unique.
-
           </UFormField>
 
-          <UButton 
-            type="submit" 
-            label="Create Team" 
-            block 
+          <UButton
+            type="submit"
+            label="Create Team"
+            block
             size="lg"
             class="mt-4"
           />
         </UForm>
 
-          <div class="text-center text-sm text-muted-foreground">
-            You can create additional teams later from the teams menu.
-          </div>
+        <div class="text-center text-sm text-muted-foreground">
+          You can create additional teams later from the teams menu.
+        </div>
       </section>
     </div>
   </main>
