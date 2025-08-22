@@ -15,7 +15,7 @@ definePageMeta({
   layout: 'auth',
 })
 
-// const { createTeam, isLoading } = useOrgs()
+// const { createOrganization } from useOrgs()
 const toast = useToast()
 
 const schema = z.object({
