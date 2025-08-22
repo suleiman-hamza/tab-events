@@ -63,3 +63,4 @@ export const verification = sqliteTable('verification', {
     () => /* @__PURE__ */ new Date(),
   ),
 })
+

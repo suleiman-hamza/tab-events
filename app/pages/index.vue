@@ -101,6 +101,8 @@ async function onSignIn(payload: FormSubmitEvent<Schema>) {
       })
     }
 
+    await navigateTo('/onboarding')
+
   } catch (error: any) {
     toast.add({
         title: error.message,
@@ -146,7 +148,7 @@ async function onSignIn(payload: FormSubmitEvent<Schema>) {
                 trailing-icon="i-lucide-lock" placeholder="Enter your password" />
             </UFormField>
 
-            <UButton label="Continue" color="neutral" type="submit" variant="solid"
+            <UButton label="Continue" color="neutral" type="submit" :loading-auto="loading" variant="solid"
               class="w-full rounded-none flex items-center justify-center" />
           </UForm>
         </template>
