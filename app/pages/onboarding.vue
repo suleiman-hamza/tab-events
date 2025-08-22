@@ -3,11 +3,13 @@ import type { FormSubmitEvent } from '@nuxt/ui'
 import * as z from 'zod'
 const router = useRouter();
 const auth = useAuth();
-// onMounted(() => {
-//   if (user.value?.name && !state.name) {
-//     state.name = `${user.value.name}'s Team`
-//   }
-// })
+const { user } = useAuth();
+
+onMounted(() => {
+  if (user.value?.name && !state.name) {
+    state.name = `${user.value.name}'s Team`
+  }
+})
 definePageMeta({
   middleware: ['auth'],
   layout: 'auth'
@@ -41,10 +43,10 @@ watch(() => state.name, (newName) => {
 async function signOut() {
   await auth.client.signOut({
     fetchOptions: {
-    onSuccess: () => {
-      router.push("/"); // redirect to login page
+      onSuccess: () => {
+        router.push("/"); // redirect to login page
+      },
     },
-  },
   });
 }
 </script>
@@ -56,8 +58,48 @@ async function signOut() {
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut accusantium cum nulla nam maiores voluptatem in,
         asperiores fugiat architecto autem molestias voluptatum voluptate cumque porro repellat ipsam vero quas sint.
       </p>
-      <UButton label="Sign Out" color="neutral" type="button" @click="signOut" loading-auto variant="outline"
-        class="w-full rounded-none flex items-center justify-center" />
+      <!-- <UButton color="neutral" type="button" @click="signOut" loading-auto variant="outline"
+        class="w-full rounded-none flex items-center justify-center">
+        Sign out
+      </UButton> -->
     </section>
+
+    <div class="flex-1 flex flex-col items-center justify-center gap-4 p-4">
+      <section class="relative w-full max-w-md bg-muted/20 border p-6">
+        <div class="text-center border  mb-4">
+          <h1 class="text-2xl font-bold">
+            Welcome to the app!
+          </h1>
+          <p class="text-muted-foreground mt-2">
+            Let's create your first team to get started.
+          </p>
+        </div>
+
+        <UForm :schema :state class="flex flex-col gap-4" @submit="">
+          <UFormField label="Team Name" name="name" required>
+            <UInput v-model="state.name" class="w-full" placeholder="e.g. My Awesome Team" />
+          </UFormField>
+
+          <UFormField label="Team Slug" name="slug" required>
+            <UInput v-model="state.slug" class="w-full" placeholder="e.g. my-awesome-team" />
+
+            This will be used in URLs and must be unique.
+
+          </UFormField>
+
+          <UButton 
+            type="submit" 
+            label="Create Team" 
+            block 
+            size="lg"
+            class="mt-4"
+          />
+        </UForm>
+
+          <div class="text-center text-sm text-muted-foreground">
+            You can create additional teams later from the teams menu.
+          </div>
+      </section>
+    </div>
   </main>
 </template>
