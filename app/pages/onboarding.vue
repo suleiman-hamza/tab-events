@@ -53,20 +53,16 @@ async function signOut() {
 
 <template>
   <main>
-    <section class="container mx-auto px-4 py-8 border">
-      <!-- <p>{{ auth.user }}</p> -->
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut accusantium cum nulla nam maiores voluptatem in,
-        asperiores fugiat architecto autem molestias voluptatum voluptate cumque porro repellat ipsam vero quas sint.
-      </p>
+    
       <!-- <UButton color="neutral" type="button" @click="signOut" loading-auto variant="outline"
         class="w-full rounded-none flex items-center justify-center">
         Sign out
       </UButton> -->
-    </section>
 
     <div class="flex-1 flex flex-col items-center justify-center gap-4 p-4">
       <section class="relative w-full max-w-md bg-muted/20 border p-6">
         <div class="text-center border  mb-4">
+          <span class="block w-20 h-20 border mx-auto mb-4"></span>
           <h1 class="text-2xl font-bold">
             Welcome to the app!
           </h1>

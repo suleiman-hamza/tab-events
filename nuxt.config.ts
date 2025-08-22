@@ -16,4 +16,14 @@ export default defineNuxtConfig({
       stylistic: true,
     },
   },
+  nitro: {
+    experimental: {
+      asyncContext: true
+    },
+    // routeRules: {
+    //   '/app/**': {
+    //     ssr: false
+    //   }
+    // }
+  },
 })
