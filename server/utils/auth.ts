@@ -17,6 +17,9 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+  session: {
+        disableSessionRefresh: true
+    },
 
   plugins: []
 })

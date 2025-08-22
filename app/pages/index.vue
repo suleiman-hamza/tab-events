@@ -2,6 +2,7 @@
 import type { FormSubmitEvent } from '@nuxt/ui'
 import * as z from 'zod'
 
+// import { authClient } from '~/plugins/auth.client'
 const auth = useAuth();
 
 interface MyTabsItem {
@@ -55,7 +56,7 @@ async function onSignUp(payload: FormSubmitEvent<Schema>) {
     loading.value = true;
     console.log(loading.value, 'loading');
 
-    const { data, error } = await auth.signUp.email({
+    const { data, error } = await auth.client.signUp.email({
       email: payload.data?.email,
       password: payload.data?.password,
       name: payload.data?.name
@@ -83,7 +84,7 @@ async function onSignUp(payload: FormSubmitEvent<Schema>) {
 async function onSignIn(payload: FormSubmitEvent<Schema>) {
   try {
     loading.value = true;
-    const { data, error } = await auth.signIn.email({
+    const { data, error } = await auth.client.signIn.email({
       email: payload.data?.email,
       password: payload.data?.password
     })
@@ -99,8 +100,9 @@ async function onSignIn(payload: FormSubmitEvent<Schema>) {
         title: error.message,
         color: 'error',
       })
-    }
+    };
 
+    await auth.fetchSession();
     await navigateTo('/onboarding')
 
   } catch (error: any) {

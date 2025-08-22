@@ -39,12 +39,12 @@ export function useAuth() {
     }
   }
 
-  if (import.meta.client) {
-    client.$store.listen('$sessionSignal', async (signal) => {
-      if (!signal) return
-      await fetchSession()
-    })
-  }
+  // if (import.meta.client) {
+  //   client.$store.listen('$sessionSignal', async (signal) => {
+  //     if (!signal) return
+  //     await fetchSession()
+  //   })
+  // }
 
     return {
         client,
