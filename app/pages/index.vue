@@ -15,6 +15,8 @@ interface MyTabsItem {
 definePageMeta({
   layout: 'auth',
 })
+
+const toast = useToast();
 const loading = ref(false);
 
 const schema = z.object({
@@ -60,22 +62,55 @@ async function onSignUp(payload: FormSubmitEvent<Schema>) {
     })
 
     console.log('data', data, 'error', error)
-    //  if (data) {
-    //   toast.add({
-    //     title: 'Successfully signed in',
-    //     color: 'success',
-    //   })
+    if (data) {
+      toast.add({
+        title: 'Successfully signed in',
+        color: 'success',
+      })
+    }
 
   } catch (error: any) {
-    // toast.add({
-      //   title: error.message,
-      //   color: 'error',
-      // })
+    toast.add({
+      title: error.message,
+      color: 'error',
+    })
   } finally {
     loading.value = false;
     console.log(loading.value, 'loading');
   }
 }
+
+async function onSignIn(payload: FormSubmitEvent<Schema>) {
+  try {
+    loading.value = true;
+    const { data, error } = await auth.signIn.email({
+      email: payload.data?.email,
+      password: payload.data?.password
+    })
+
+    if (data) {
+      toast.add({
+        title: "Successfully signed in",
+        description: "lorem ipsum dolor",
+        color: 'success',
+      })
+    } else {
+      toast.add({
+        title: error.message,
+        color: 'error',
+      })
+    }
+
+  } catch (error: any) {
+    toast.add({
+        title: error.message,
+        color: 'error',
+      })
+  } finally {
+    loading.value = false;
+  }
+}
+
 </script>
 
 <template>
@@ -101,15 +136,18 @@ async function onSignUp(payload: FormSubmitEvent<Schema>) {
             {{ item.description }}
           </p>
 
-          <UForm :state="state" class="flex flex-col gap-4">
+          <UForm :state="state" class="flex flex-col gap-4" @submit="onSignIn">
             <UFormField label="Email" name="email">
-              <UInput v-model="state.email" class="w-full !rounded-none ring-0 shadow-none inset-ring-0" trailing-icon="i-lucide-at-sign" placeholder="Enter your email" />
+              <UInput v-model="state.email" class="w-full !rounded-none ring-0 shadow-none inset-ring-0"
+                trailing-icon="i-lucide-at-sign" placeholder="Enter your email" />
             </UFormField>
             <UFormField label="password" name="password">
-              <UInput v-model="state.password" type="password" class="w-full !rounded-none" trailing-icon="i-lucide-lock" placeholder="Enter your password" />
+              <UInput v-model="state.password" type="password" class="w-full !rounded-none"
+                trailing-icon="i-lucide-lock" placeholder="Enter your password" />
             </UFormField>
 
-            <UButton label="Continue" color="neutral" type="submit" variant="solid" class="w-full rounded-none flex items-center justify-center" />
+            <UButton label="Continue" color="neutral" type="submit" variant="solid"
+              class="w-full rounded-none flex items-center justify-center" />
           </UForm>
         </template>
 
@@ -123,16 +161,20 @@ async function onSignUp(payload: FormSubmitEvent<Schema>) {
 
           <UForm :state="state" class="flex flex-col gap-4" @submit="onSignUp">
             <UFormField label="Email" name="email">
-              <UInput v-model="state.email" class="w-full !rounded-none" trailing-icon="i-lucide-at-sign" placeholder="Enter your email" />
+              <UInput v-model="state.email" class="w-full !rounded-none" trailing-icon="i-lucide-at-sign"
+                placeholder="Enter your email" />
             </UFormField>
             <UFormField label="password" name="password">
-              <UInput v-model="state.password" type="password" class="w-full !rounded-none border-0" trailing-icon="i-lucide-lock" placeholder="Enter your password" />
+              <UInput v-model="state.password" type="password" class="w-full !rounded-none border-0"
+                trailing-icon="i-lucide-lock" placeholder="Enter your password" />
             </UFormField>
             <UFormField label="Name" name="name">
-              <UInput v-model="state.name" class="w-full rounded-none border-0" trailing-icon="i-lucide-at-profile" placeholder="Enter Fullname" />
+              <UInput v-model="state.name" class="w-full rounded-none border-0" trailing-icon="i-lucide-at-profile"
+                placeholder="Enter Fullname" />
             </UFormField>
 
-            <UButton label="Continue" color="neutral" type="submit" :loading-auto="loading" variant="solid" class="w-full flex items-center justify-center rounded-none" />
+            <UButton label="Continue" color="neutral" type="submit" :loading-auto="loading" variant="solid"
+              class="w-full flex items-center justify-center rounded-none" />
           </UForm>
         </template>
       </UTabs>

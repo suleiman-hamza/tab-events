@@ -8,7 +8,9 @@ export function useAuth() {
         baseURL: url.origin,
         fetchOptions: {
             headers,
-        }
+        },
+        // client side plugins can be added here
+        plugins: []
     })
 
     return {

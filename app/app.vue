@@ -1,8 +1,8 @@
 <template>
-  <NuxtLoadingIndicator />
-  <NuxtLayout>
-    <UApp>
+   <UApp :toaster="{ expand: false }">
+    <NuxtLoadingIndicator />
+    <NuxtLayout>
       <NuxtPage />
-    </UApp>
-  </NuxtLayout>
+    </NuxtLayout>
+  </UApp>
 </template>

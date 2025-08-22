@@ -1,4 +1,5 @@
 import { betterAuth } from 'better-auth'
+import { organization, admin } from 'better-auth/plugins'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { db } from '../utils/drizzle' // your drizzle instance
 import { user, session, account, verification } from "../database/schema/auth" // your schema definition;
@@ -16,4 +17,6 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+
+  plugins: []
 })
