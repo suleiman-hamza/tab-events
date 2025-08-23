@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import * as z from 'zod'
+import { useOrgs } from '~/composables/useOrgs'
+import type { FormSubmitEvent } from '@nuxt/ui'
 
-const router = useRouter()
-const auth = useAuth()
-const { user } = useAuth()
+const router = useRouter();
+const auth = useAuth();
+const { user } = useAuth();
+const toast = useToast();
+const { createOrganization } = useOrgs();
 
 onMounted(() => {
   if (user.value?.name && !state.name) {
@@ -15,8 +19,6 @@ definePageMeta({
   layout: 'auth',
 })
 
-// const { createOrganization } from useOrgs()
-const toast = useToast()
 
 const schema = z.object({
   name: z.string().min(1, 'Team name is required'),
@@ -49,6 +51,28 @@ async function signOut() {
     },
   })
 }
+
+async function onCreateOrganization(event: FormSubmitEvent<Schema>) {
+  try {
+    const success = await createOrganization(event)
+    if (!success) return
+
+    toast.add({
+      title: 'Welcome! Your team has been created.',
+      description: 'You can now start using the application.',
+      color: 'success'
+    })
+
+    await new Promise(resolve => setTimeout(resolve, 150))
+    await navigateTo('/app/user')
+  } catch (error: any) {
+    toast.add({
+      title: 'Failed to create team',
+      description: error.message,
+      color: 'error'
+    })
+  }
+}
 </script>
 
 <template>
@@ -70,7 +94,7 @@ async function signOut() {
           </p>
         </div>
 
-        <UForm :schema :state class="flex flex-col gap-4" @submit="">
+        <UForm :schema :state class="flex flex-col gap-4" @submit="onCreateOrganization">
           <UFormField label="Team Name" name="name" required>
             <UInput v-model="state.name" class="w-full" placeholder="e.g. My Awesome Team" />
           </UFormField>
@@ -81,13 +105,7 @@ async function signOut() {
             This will be used in URLs and must be unique.
           </UFormField>
 
-          <UButton
-            type="submit"
-            label="Create Team"
-            block
-            size="lg"
-            class="mt-4"
-          />
+          <UButton type="submit" label="Create Team" block size="lg" class="mt-4" />
         </UForm>
 
         <div class="text-center text-sm text-muted-foreground">

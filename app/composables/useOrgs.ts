@@ -1,17 +1,19 @@
 import type { Organization, Member } from 'better-auth/plugins'
-const { client } = useAuth();
-const toast = useToast();
+import type { FormSubmitEvent } from '@nuxt/ui'
+import type { createTeamSchema } from '../../shared/types/organization'
+
 
 export const useCurrentOrganization = () => {
     return useState<Organization | null>('organization', () => null)
 }
 
 export function useOrgs() {
+    const toast = useToast();
     const { client } = useAuth()
     const organization = useCurrentOrganization()
     const activeOrganizationId = useCookie('active-organization-id')
 
-    async function createOrganization() {
+    async function createOrganization(event: FormSubmitEvent<createTeamSchema>) {
         const { data, error } = await client.organization.create({
             name: "My Organization", // required
             slug: "my-org", // required
