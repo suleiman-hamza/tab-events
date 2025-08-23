@@ -42,16 +42,6 @@ watch(() => state.name, (newName) => {
   }
 })
 
-async function signOut() {
-  await auth.client.signOut({
-    fetchOptions: {
-      onSuccess: () => {
-        router.push('/') // redirect to login page
-      },
-    },
-  })
-}
-
 async function onCreateOrganization(event: FormSubmitEvent<Schema>) {
   try {
     const success = await createOrganization(event)
@@ -77,11 +67,6 @@ async function onCreateOrganization(event: FormSubmitEvent<Schema>) {
 
 <template>
   <main>
-    <!-- <UButton color="neutral" type="button" @click="signOut" loading-auto variant="outline"
-        class="w-full rounded-none flex items-center justify-center">
-        Sign out
-      </UButton> -->
-
     <div class="flex-1 flex flex-col items-center justify-center gap-4 p-4">
       <section class="relative w-full max-w-md bg-muted/20 border p-6">
         <div class="text-center border  mb-4">
