@@ -10,4 +10,9 @@ export default antfu({
   // TypeScript and Vue are autodetected, you can also explicitly enable them:
   typescript: true,
   vue: true,
+  rules: {
+    'no-unused-vars': 'off',
+    'unused-imports/no-unused-vars': 'off',
+    'ts/no-redeclare': 'off',
+  },
 })

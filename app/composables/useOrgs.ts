@@ -1,45 +1,105 @@
-import type { Organization, Member } from 'better-auth/plugins'
 import type { FormSubmitEvent } from '@nuxt/ui'
-import type { createTeamSchema } from '../../shared/types/organization'
+import type { Organization } from 'better-auth/plugins'
+import type { createTeamsSchema, FullOrganization } from '../../shared/types/organization'
 
-
-export const useCurrentOrganization = () => {
-    return useState<Organization | null>('organization', () => null)
+export function useCurrentOrganization() {
+  return useState<Organization | null>('organization', () => null)
 }
 
 export function useOrgs() {
-    const toast = useToast();
-    const { client } = useAuth()
-    const organization = useCurrentOrganization()
-    const activeOrganizationId = useCookie('active-organization-id')
+  const toast = useToast()
+  const { client } = useAuth()
+  const organization = useCurrentOrganization()
+  const activeOrganizationId = useCookie('active-organization-id')
 
-    async function createOrganization(event: FormSubmitEvent<createTeamSchema>) {
-        const { data, error } = await client.organization.create({
-            name: "My Organization", // required
-            slug: "my-org", // required
-            logo: "https://example.com/logo.png",
-            // metadata,
-            // keepCurrentActiveOrganization: false,
-        });
+  const isLoading = useState('orgs-loading', () => false)
+  const organizations = useState<FullOrganization[]>('organizations', () => []) // shows orgs list[]
 
-        if (error) {
-            toast.add({
-                title: 'Failed to create team',
-                color: 'error'
-            })
-            return false
-        } else {
-            toast.add({
-                title: 'Team created',
-                color: 'success'
-            })
-            return true
-        }
+  // function gets full details of an org, when you pass in a slug/id
+  async function getFullOrganization(orgId?: string) {
+    if (!orgId) {
+      const { data, error } = await client.organization.getFullOrganization()
+      if (error) {
+        toast.add({
+          title: 'Failed to fetch organization',
+          color: 'error',
+        })
+      }
+      return data
     }
 
-    return {
-        createOrganization,
-        organization,
-        activeOrganizationId,
+    const { data, error } = await client.organization.getFullOrganization({
+      query: { organizationId: orgId },
+    })
+
+    if (error) {
+      toast.add({
+        title: 'Failed to fetch organizations',
+        color: 'error',
+      })
     }
+    return data
+  }
+
+  // fetch organizations that the user is a member of
+  async function fetchOrganizations() {
+    if (isLoading.value)
+      return organizations.value
+    isLoading.value = true
+
+    try {
+      const { data, error } = await client.organization.list() // list orgs a user is a member of
+
+      if (error) {
+        toast.add({
+          title: 'Failed to fetch organizations',
+          color: 'error',
+        })
+        return organizations.value
+      }
+
+      const fullOrgs = await Promise.all(
+        data.map(org => getFullOrganization(org.id)),
+      ) as FullOrganization[]
+
+      organizations.value = fullOrgs
+    }
+    finally {
+      isLoading.value = false
+    }
+  }
+
+  async function createOrganization(event: FormSubmitEvent<createTeamsSchema>) {
+    const { data, error } = await client.organization.create({
+      name: event.data.name, // required
+      slug: event.data.slug, // required
+      logo: event.data.logo,
+      // metadata,
+      // keepCurrentActiveOrganization: false,
+    })
+
+    if (error) {
+      toast.add({
+        title: 'Failed to create team',
+        color: 'error',
+      })
+      return false
+    }
+
+    await fetchOrganizations()
+    if (data) {
+      // await selectTeam(data.id, { showToast: false })
+    }
+    return true
+  }
+
+  return {
+    organization,
+    organizations,
+    getFullOrganization,
+    isLoading,
+    fetchOrganizations,
+    createOrganization,
+    activeOrganizationId,
+  }
 }
