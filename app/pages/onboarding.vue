@@ -1,24 +1,18 @@
 <script setup lang="ts">
+import type { FormSubmitEvent } from '@nuxt/ui'
 import * as z from 'zod'
 import { useOrgs } from '~/composables/useOrgs'
-import type { FormSubmitEvent } from '@nuxt/ui'
 
-const router = useRouter();
-const auth = useAuth();
-const { user } = useAuth();
-const toast = useToast();
-const { createOrganization } = useOrgs();
+const router = useRouter()
+const auth = useAuth()
+const { user } = useAuth()
+const toast = useToast()
+const { createOrganization } = useOrgs()
 
-onMounted(() => {
-  if (user.value?.name && !state.name) {
-    state.name = `${user.value.name}'s Team`
-  }
-})
 definePageMeta({
   middleware: ['auth'],
   layout: 'auth',
 })
-
 
 const schema = z.object({
   name: z.string().min(1, 'Team name is required'),
@@ -30,6 +24,12 @@ type Schema = z.output<typeof schema>
 const state = reactive<Partial<Schema>>({
   name: undefined,
   slug: undefined,
+})
+
+onMounted(() => {
+  if (user.value?.name && !state.name) {
+    state.name = `${user.value.name}'s Team`
+  }
 })
 
 watch(() => state.name, (newName) => {
@@ -45,21 +45,23 @@ watch(() => state.name, (newName) => {
 async function onCreateOrganization(event: FormSubmitEvent<Schema>) {
   try {
     const success = await createOrganization(event)
-    if (!success) return
+    if (!success)
+      return
 
     toast.add({
       title: 'Welcome! Your team has been created.',
       description: 'You can now start using the application.',
-      color: 'success'
+      color: 'success',
     })
 
     await new Promise(resolve => setTimeout(resolve, 150))
     await navigateTo('/app/user')
-  } catch (error: any) {
+  }
+  catch (error: any) {
     toast.add({
       title: 'Failed to create team',
       description: error.message,
-      color: 'error'
+      color: 'error',
     })
   }
 }

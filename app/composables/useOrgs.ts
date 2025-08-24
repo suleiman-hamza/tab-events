@@ -86,6 +86,7 @@ export function useOrgs() {
       ) as FullOrganization[]
 
       organizations.value = fullOrgs
+      return fullOrgs
     }
     finally {
       isLoading.value = false
@@ -111,7 +112,7 @@ export function useOrgs() {
 
     await fetchOrganizations()
     if (data) {
-      // await selectTeam(data.id, { showToast: false })
+      await selectTeam(data.id)
     }
     return true
   }
@@ -120,6 +121,7 @@ export function useOrgs() {
     organization,
     organizations,
     getFullOrganization,
+    fetchCurrentOrganization,
     isLoading,
     fetchOrganizations,
     createOrganization,
