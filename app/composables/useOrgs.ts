@@ -41,6 +41,29 @@ export function useOrgs() {
     return data
   }
 
+  async function fetchCurrentOrganization() {
+    if (!activeOrganizationId.value)
+      return null
+    organization.value = await getFullOrganization(activeOrganizationId.value)
+    return organization.value
+  }
+
+  async function selectTeam(id: string) {
+    const { data, error } = await client.organization.setActive({
+      organizationId: id,
+    })
+
+    activeOrganizationId.value = id
+    await fetchCurrentOrganization()
+
+    if (data) {
+      toast.add({
+        title: 'Team selected',
+        color: 'success',
+      })
+    }
+  }
+
   // fetch organizations that the user is a member of
   async function fetchOrganizations() {
     if (isLoading.value)
