@@ -82,7 +82,7 @@ export function useOrgs() {
       }
 
       const fullOrgs = await Promise.all(
-        data.map(org => getFullOrganization(org.id)),
+        data!.map(org => getFullOrganization(org.id)),
       ) as FullOrganization[]
 
       organizations.value = fullOrgs

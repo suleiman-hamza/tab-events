@@ -4,6 +4,7 @@ import * as z from 'zod'
 
 // import { authClient } from '~/plugins/auth.client'
 const auth = useAuth()
+const { fetchOrganizations } = useOrgs()
 
 interface MyTabsItem {
   label: string
@@ -54,7 +55,6 @@ const items = ref<MyTabsItem[]>([
 async function onSignUp(payload: FormSubmitEvent<Schema>) {
   try {
     loading.value = true
-    console.log(loading.value, 'loading')
 
     const { data, error } = await auth.client.signUp.email({
       email: payload.data?.email,
@@ -62,12 +62,12 @@ async function onSignUp(payload: FormSubmitEvent<Schema>) {
       name: payload.data?.name,
     })
 
-    console.log('data', data, 'error', error)
     if (data) {
       toast.add({
         title: 'Successfully signed in',
         color: 'success',
       })
+      navigateTo('/app/user')
     }
   }
   catch (error: any) {
@@ -78,7 +78,6 @@ async function onSignUp(payload: FormSubmitEvent<Schema>) {
   }
   finally {
     loading.value = false
-    console.log(loading.value, 'loading')
   }
 }
 
@@ -104,8 +103,8 @@ async function onSignIn(payload: FormSubmitEvent<Schema>) {
       })
     };
 
-    await auth.fetchSession()
-    await navigateTo('/onboarding')
+    await fetchOrganizations()
+    await navigateTo('/app/user')
   }
   catch (error: any) {
     toast.add({

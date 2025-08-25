@@ -1,12 +1,13 @@
 <script setup lang="ts">
 const auth = useAuth()
+const { fetchOrganizations } = useOrgs()
 const router = useRouter()
+
+const activeOrganization = await fetchOrganizations()
 
 definePageMeta({
   middleware: ['auth'],
 })
-
-const activeOrganization = await auth.client.organization.list()
 
 async function signOut() {
   await auth.client.signOut({
