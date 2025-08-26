@@ -65,6 +65,7 @@ export function useOrgs() {
   }
 
   // fetch organizations that the user is a member of
+  // Get all orgs the user is a member of, with detailed info
   async function fetchOrganizations() {
     if (isLoading.value)
       return organizations.value
@@ -126,5 +127,6 @@ export function useOrgs() {
     fetchOrganizations,
     createOrganization,
     activeOrganizationId,
+    selectTeam,
   }
 }

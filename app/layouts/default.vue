@@ -1,11 +1,22 @@
+<script setup lang="ts">
+import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from 'reka-ui'
+</script>
+
 <template>
-  <main class="flex">
-    <DashboardSidebar />
-    <section class="flex-1 flex flex-col h-screen">
-      <DashboardHeader />
-      <div class="overflow-y-auto">
-        <slot />
-      </div>
-    </section>
-  </main>
+  <SplitterGroup class="flex" direction="horizontal">
+    <SplitterPanel :min-size="10" :max-size="25" :default-size="20" as-child>
+      <DashboardSidebar />
+    </SplitterPanel>
+
+    <SplitterResizeHandle />
+
+    <SplitterPanel as-child>
+      <section class="flex flex-col h-screen">
+        <DashboardHeader />
+        <div class="overflow-y-auto p-4 sm:p-6">
+          <slot />
+        </div>
+      </section>
+    </SplitterPanel>
+  </SplitterGroup>
 </template>
