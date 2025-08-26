@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from 'reka-ui'
+
 const auth = useAuth()
 const { fetchOrganizations } = useOrgs()
 const router = useRouter()
@@ -40,6 +42,64 @@ async function signOut() {
             sign out to use a different account
           </a> -->
         </p>
+      </div>
+      <div class="w-full h-64 px-8 md:px-16 text-green9 font-semibold text-sm border">
+        <SplitterGroup
+          id="splitter-group-1"
+          direction="horizontal"
+        >
+          <SplitterPanel
+            id="splitter-group-1-panel-1"
+            :min-size="20"
+            class="bg-white border rounded-xl flex items-center justify-center"
+          >
+            Panel A
+          </SplitterPanel>
+          <SplitterResizeHandle
+            id="splitter-group-1-resize-handle-1"
+            class="w-2"
+          />
+          <SplitterPanel
+            id="splitter-group-1-panel-2"
+            :min-size="20"
+          >
+            <SplitterGroup
+              id="splitter-group-2"
+              direction="vertical"
+            >
+              <SplitterPanel
+                id="splitter-group-2-panel-1"
+                :min-size="20"
+                class="bg-green-200 border rounded-xl flex items-center justify-center"
+              >
+                Panel B
+              </SplitterPanel>
+              <SplitterResizeHandle
+                id="splitter-group-2-resize-handle-1"
+                class="h-2"
+              />
+              <SplitterPanel
+                id="splitter-group-2-panel-2"
+                :min-size="20"
+                class="bg-red-500 border rounded-xl flex items-center justify-center"
+              >
+                Panel C
+              </SplitterPanel>
+            </SplitterGroup>
+          </SplitterPanel>
+        </SplitterGroup>
+      </div>
+
+      <div class="border border-emerald-400">
+        <SplitterGroup direction="horizontal">
+          <SplitterPanel class="bg-blue-700 text-2xl text-white p-6" :min-size="20">
+            A
+          </SplitterPanel>
+          <SplitterResizeHandle />
+          <SplitterPanel class="bg-rose-400 text-2xl text-white p-6" :min-size="10">
+            B
+          </SplitterPanel>
+        </SplitterGroup>
       </div>
 
       <div class="text-center text-sm text-muted-foreground">
