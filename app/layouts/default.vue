@@ -5,7 +5,7 @@ import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from 'reka-ui'
 <template>
   <SplitterGroup class="flex" direction="horizontal">
     <SplitterPanel :min-size="10" :max-size="25" :default-size="20" as-child>
-      <DashboardSidebar />
+      <DashboardSidebar class="p-4" />
     </SplitterPanel>
 
     <SplitterResizeHandle />
