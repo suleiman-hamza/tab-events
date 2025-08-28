@@ -96,7 +96,7 @@ async function onCreateOrganization(event: FormSubmitEvent<Schema>) {
         </UForm>
 
         <div class="text-center text-sm text-muted-foreground">
-          You can create additional teams later from the teams menu.
+          You can create additional teams later from the organization's menu.
         </div>
       </section>
     </div>

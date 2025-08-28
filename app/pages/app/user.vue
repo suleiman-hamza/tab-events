@@ -2,10 +2,8 @@
 import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from 'reka-ui'
 
 const auth = useAuth()
-const { fetchOrganizations } = useOrgs()
+const { organizations } = useOrgs()
 const router = useRouter()
-
-const activeOrganization = await fetchOrganizations()
 
 definePageMeta({
   middleware: ['auth'],
@@ -29,7 +27,7 @@ async function signOut() {
         <div>
           <h2>Active organization</h2>
           <pre>
-            {{ activeOrganization }}
+            {{ organizations }}
           </pre>
         </div>
         <!-- <img class="mx-auto h-12 w-auto" src="/logo.png" alt="Your Company" /> -->
