@@ -4,7 +4,6 @@ import type { FormSubmitEvent } from '@nuxt/ui'
 
 const emit = defineEmits<{ close: [boolean] }>()
 const { createOrganization } = useOrgs()
-const toast = useToast()
 
 const state = reactive<Partial<createTeamsSchema>>({
   name: undefined,
