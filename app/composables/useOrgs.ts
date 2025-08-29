@@ -145,6 +145,12 @@ export function useOrgs() {
     await fetchOrganizations()
   }
 
+  function clearState() {
+    activeOrganizationId.value = null
+    organizations.value = []
+    organization.value = null
+  }
+
   return {
     organization,
     organizations,
@@ -156,5 +162,6 @@ export function useOrgs() {
     activeOrganizationId,
     selectTeam,
     deleteOrganization,
+    clearState,
   }
 }

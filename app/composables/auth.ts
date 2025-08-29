@@ -19,6 +19,7 @@ export function useAuth() {
   const session = useState<InferSessionFromClient<ClientOptions> | null>('auth:session', () => null)
   const user = useState<InferUserFromClient<ClientOptions> | null>('auth:user', () => null)
   const sessionFetching = import.meta.server ? ref(false) : useState('auth:sessionFetching', () => false)
+  const activeOrganizationId = useCookie('active-organization-id')
 
   const fetchSession = async () => {
     if (sessionFetching.value)
@@ -59,6 +60,22 @@ export function useAuth() {
     sessionFetching,
     user,
     fetchSession,
+    async signOut() {
+      const { clearState } = useOrgs()
+      if (!user.value) {
+        clearState()
+        await navigateTo('/')
+        return
+      }
+
+      const res = await client.signOut()
+      session.value = null
+      user.value = null
+      activeOrganizationId.value = null
+      clearState()
+      await navigateTo('/')
+      return res
+    },
     loggedIn: computed(() => !!session.value),
   }
 }

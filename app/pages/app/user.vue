@@ -8,16 +8,6 @@ const router = useRouter()
 definePageMeta({
   middleware: ['auth'],
 })
-
-async function signOut() {
-  await auth.client.signOut({
-    fetchOptions: {
-      onSuccess: () => {
-        router.push('/') // redirect to login page
-      },
-    },
-  })
-}
 </script>
 
 <template>
@@ -105,13 +95,6 @@ async function signOut() {
         <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Terms of Service</a> and
         <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Privacy Policy</a>.
       </div>
-
-      <UButton
-        color="neutral" type="button" loading-auto variant="outline"
-        class="w-full rounded-none flex items-center justify-center" @click="signOut"
-      >
-        Sign out
-      </UButton>
     </div>
   </div>
 </template>
