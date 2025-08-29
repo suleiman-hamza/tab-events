@@ -118,6 +118,33 @@ export function useOrgs() {
     return true
   }
 
+  async function deleteOrganization(orgId: string) {
+    const { data, error } = await client.organization.delete({
+      organizationId: orgId,
+    })
+
+    if (error) {
+      toast.add({
+        title: 'Failed to delete Organization',
+        color: 'error',
+      })
+    }
+
+    if (data) {
+      toast.add({
+        title: 'Organization Deleted',
+        color: 'success',
+      })
+    }
+
+    // Clear the cookie if the deleted org was active
+    if (activeOrganizationId.value === orgId) {
+      activeOrganizationId.value = null
+    }
+
+    await fetchOrganizations()
+  }
+
   return {
     organization,
     organizations,
@@ -128,5 +155,6 @@ export function useOrgs() {
     createOrganization,
     activeOrganizationId,
     selectTeam,
+    deleteOrganization,
   }
 }

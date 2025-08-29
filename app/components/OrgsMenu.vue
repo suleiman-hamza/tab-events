@@ -4,6 +4,7 @@ import { CreateOrgModal } from '#components'
 
 const {
   isLoading,
+  activeOrganizationId,
   organization,
   organizations,
   selectTeam,
@@ -62,6 +63,7 @@ const items = computed<DropdownMenuItem[]>(() => {
     :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width)' }"
     class="rounded-none w-full border border-amber-600 bg-white"
   >
-    <UButton :label="organization?.name" trailing-icon="i-lucide-chevrons-up-down" color="neutral" variant="outline" class="rounded-none w-full border border-amber-600 flex justify-between" />
+    <UButton v-if="!activeOrganizationId" label="Select An Org" trailing-icon="i-lucide-chevrons-up-down" color="neutral" variant="outline" class="rounded-none w-full border border-amber-600 flex justify-between" />
+    <UButton v-else :label="organization?.name" trailing-icon="i-lucide-chevrons-up-down" color="neutral" variant="outline" class="rounded-none w-full border border-amber-600 flex justify-between" />
   </UDropdownMenu>
 </template>
