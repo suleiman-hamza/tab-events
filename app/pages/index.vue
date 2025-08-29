@@ -16,6 +16,7 @@ interface MyTabsItem {
 
 definePageMeta({
   layout: 'auth',
+  middleware: ['guest'],
 })
 
 const toast = useToast()
