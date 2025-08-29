@@ -16,5 +16,12 @@ export const auth = betterAuth({
     disableSessionRefresh: true,
   },
 
-  plugins: [organization()],
+  plugins: [organization({
+    organizationDeletion: {
+      disabled: false,
+      afterDelete: async (data, request) => {
+        await console.error('Organization deleted', data.organization.name)
+      },
+    },
+  })],
 })
