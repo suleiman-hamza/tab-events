@@ -6,6 +6,15 @@ const { signOut } = useAuth()
   <nav class="border-r h-screen flex flex-col justify-between">
     <OrgsMenu />
     <div class="border flex flex-col gap-1">
+      <NuxtLink to="/app/user">
+        Dashboard
+      </NuxtLink>
+      <NuxtLink to="/">
+        Settings
+      </NuxtLink>
+      <NuxtLink to="/app/event">
+        Calender
+      </NuxtLink>
       <NuxtLink to="/app/event">
         Event
       </NuxtLink>

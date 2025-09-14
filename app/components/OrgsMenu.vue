@@ -61,7 +61,7 @@ const items = computed<DropdownMenuItem[]>(() => {
   <UDropdownMenu
     :items="items" :content="{ align: 'center', collisionPadding: 12 }"
     :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width)' }"
-    class="rounded-none w-full border border-amber-600 bg-white"
+    class="rounded-none w-full"
   >
     <!-- <UButton v-if="!activeOrganizationId" label="Select An Org" trailing-icon="i-lucide-chevrons-up-down" color="neutral" variant="outline" class="rounded-none w-full border border-amber-600 flex justify-between" /> -->
     <UButton :label="organization?.name" trailing-icon="i-lucide-chevrons-up-down" color="neutral" variant="outline" class="rounded-none w-full border border-amber-600 flex justify-between" />

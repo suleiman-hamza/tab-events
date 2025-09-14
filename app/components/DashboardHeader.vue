@@ -15,8 +15,8 @@ const profileItems = ref([
   <nav class="border w-full border-red-500 h-auto p-3 flex justify-between items-center">
     <h2>Home</h2>
     <div class="flex gap-4">
-      <UButton label="S" variant="soft" class="flex items-center justify-center rounded-full w-10 h-10" />
-      <UButton label="N" variant="soft" class="flex items-center justify-center rounded-full w-10 h-10" />
+      <UButton icon="i-lucide-search" variant="soft" class="flex items-center justify-center rounded-full w-10 h-10" />
+      <UButton icon="i-lucide-bell" variant="soft" class="flex items-center justify-center rounded-full w-10 h-10" />
       <UDropdownMenu :items="profileItems">
         <UButton label="P" variant="soft" class="flex items-center justify-center rounded-full w-10 h-10" />
       </UDropdownMenu>
