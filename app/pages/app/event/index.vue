@@ -18,7 +18,7 @@ const items = ref([
 </script>
 
 <template>
-  <section class="border">
+  <section class="w-full">
     <header class="flex justify-between">
       <h2>Events</h2>
       <UTabs :items="items">

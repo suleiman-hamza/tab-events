@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
-
 const { signOut } = useAuth()
 
-const items = ref<NavigationMenuItem[]>([
+const items = ref([
   {
     label: 'Dashboard',
     icon: 'i-lucide-home',

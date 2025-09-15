@@ -1,24 +1,94 @@
 <script setup lang="ts">
-import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from 'reka-ui'
+const { signOut } = useAuth()
+
+const items = ref([
+  {
+    label: 'Dashboard',
+    icon: 'i-lucide-home',
+    to: '/app/user',
+  },
+  {
+    label: 'Events',
+    icon: 'i-lucide-calendar',
+    to: '/app/event',
+  },
+  {
+    label: 'Organizations',
+    icon: 'i-lucide-users',
+    to: '/app/organization',
+  },
+  {
+    label: 'Invites',
+    icon: 'i-lucide-mail',
+    to: '/app/invite',
+  },
+  {
+    label: 'Settings',
+    icon: 'i-lucide-user-cog',
+    children: [
+      {
+        label: 'Preferences',
+        to: '/app/settings',
+      },
+      {
+        label: 'Security',
+        to: '/app/settings/security',
+      },
+      {
+        label: 'Appearance',
+        to: '/app/user/notifications',
+      },
+    ],
+  },
+  {
+    label: 'Help & Support',
+    icon: 'i-lucide-help-circle',
+    to: '/app/support',
+    children: [
+      {
+        label: 'Documentation',
+        to: '/app/support/docs',
+      },
+      {
+        label: 'Contact Support',
+        to: '/app/support/contact',
+      },
+    ],
+  },
+])
 </script>
 
 <template>
   <UDashboardGroup>
-    <SplitterGroup class="flex" direction="horizontal">
-      <SplitterPanel :min-size="10" :max-size="25" :default-size="20" as-child>
-        <DashboardSidebar class="p-4" />
-      </SplitterPanel>
+    <UDashboardSidebar
+      id="default"
+      collapsible
+      resizable
+      class="bg-elevated/25"
+      :ui="{ footer: 'lg:border-t lg:border-default' }"
+    >
+      <template #header>
+        <OrgsMenu />
+      </template>
 
-      <SplitterResizeHandle />
+      <template #default>
+        <UNavigationMenu
+          orientation="vertical" popover highlight highlight-color="primary" :items="items"
+          class=""
+        />
+      </template>
 
-      <SplitterPanel as-child>
-        <section class="flex flex-col h-screen">
-          <DashboardHeader />
-          <div class="overflow-y-auto p-4 sm:p-6">
-            <slot />
-          </div>
-        </section>
-      </SplitterPanel>
-    </SplitterGroup>
+      <template #footer>
+        <UButton
+          color="neutral" type="button" loading-auto variant="outline"
+          class="w-full rounded-none flex items-center justify-center" @click="signOut()"
+        >
+          Sign out
+        </UButton>
+      </template>
+    </UDashboardSidebar>
+    <section class="w-full p-4">
+      <slot />
+    </section>
   </UDashboardGroup>
 </template>
