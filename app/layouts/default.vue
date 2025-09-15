@@ -59,7 +59,7 @@ const items = ref([
 </script>
 
 <template>
-  <UDashboardGroup>
+  <UDashboardGroup class="flex">
     <UDashboardSidebar
       id="default"
       collapsible
@@ -83,12 +83,23 @@ const items = ref([
           color="neutral" type="button" loading-auto variant="outline"
           class="w-full rounded-none flex items-center justify-center" @click="signOut()"
         >
-          Sign out
+          Si
         </UButton>
       </template>
     </UDashboardSidebar>
-    <section class="w-full p-4">
-      <slot />
+    <section class="w-full flex flex-col">
+      <UDashboardPanel id="inbox-1" resizable>
+        <template #header>
+          <UDashboardNavbar title="Home">
+            <template #leading>
+              <UDashboardSidebarCollapse />
+            </template>
+          </UDashboardNavbar>
+        </template>
+        <template #body>
+          <slot />
+        </template>
+      </UDashboardPanel>
     </section>
   </UDashboardGroup>
 </template>
