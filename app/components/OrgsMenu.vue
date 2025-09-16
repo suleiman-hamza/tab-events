@@ -2,6 +2,10 @@
 import type { DropdownMenuItem } from '@nuxt/ui'
 import { CreateOrgModal } from '#components'
 
+defineProps<{
+  collapsed?: boolean
+}>()
+
 const {
   isLoading,
   activeOrganizationId,
@@ -60,7 +64,7 @@ const items = computed<DropdownMenuItem[]>(() => {
 <template>
   <UDropdownMenu
     :items="items" :content="{ align: 'center', collisionPadding: 12 }"
-    :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width)' }"
+    :ui="{ content: collapsed ? 'w-40' : 'w-(--reka-dropdown-menu-trigger-width)' }"
     class="rounded-none w-full"
   >
     <!-- <UButton v-if="!activeOrganizationId" label="Select An Org" trailing-icon="i-lucide-chevrons-up-down" color="neutral" variant="outline" class="rounded-none w-full border border-amber-600 flex justify-between" /> -->

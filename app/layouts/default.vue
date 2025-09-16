@@ -67,24 +67,26 @@ const items = ref([
       class="bg-elevated/25"
       :ui="{ footer: 'lg:border-t lg:border-default' }"
     >
-      <template #header>
-        <OrgsMenu />
+      <template #header="{ collapsed }">
+        <OrgsMenu :collapsed />
       </template>
 
-      <template #default>
+      <template #default="{ collapsed }">
         <UNavigationMenu
-          orientation="vertical" popover highlight highlight-color="primary" :items="items"
+          orientation="vertical" popover highlight highlight-color="primary"
+          :items="items"
+          :collapsed
           class=""
         />
       </template>
 
-      <template #footer>
+      <template #footer="{ collapsed }">
         <UButton
+          :label="collapsed ? undefined : 'Log out'"
+          icon="i-lucide-log-out"
           color="neutral" type="button" loading-auto variant="outline"
           class="w-full rounded-none flex items-center justify-center" @click="signOut()"
-        >
-          Si
-        </UButton>
+        />
       </template>
     </UDashboardSidebar>
     <section class="w-full flex flex-col">
