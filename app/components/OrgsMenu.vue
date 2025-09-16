@@ -64,10 +64,26 @@ const items = computed<DropdownMenuItem[]>(() => {
 <template>
   <UDropdownMenu
     :items="items" :content="{ align: 'center', collisionPadding: 12 }"
-    :ui="{ content: collapsed ? 'w-40' : 'w-(--reka-dropdown-menu-trigger-width)' }"
-    class="rounded-none w-full"
+    :ui="{ content: collapsed ? 'w-40' : 'w-(--reka-dropdown-menu-trigger-width)' }" class="rounded-none w-full"
   >
     <!-- <UButton v-if="!activeOrganizationId" label="Select An Org" trailing-icon="i-lucide-chevrons-up-down" color="neutral" variant="outline" class="rounded-none w-full border border-amber-600 flex justify-between" /> -->
-    <UButton :label="organization?.name" trailing-icon="i-lucide-chevrons-up-down" color="neutral" variant="outline" class="rounded-none w-full border border-amber-600 flex justify-between" />
+    <UButton
+      v-bind="{
+        avatar: {
+          src: organization?.logo || '',
+          alt: organization?.name || '',
+        },
+        label: collapsed ? undefined : organization?.name,
+        trailingIcon: collapsed ? undefined : 'i-lucide-chevrons-up-down',
+      }"
+      color="neutral"
+      variant="outline"
+      :square="collapsed"
+      :class="[!collapsed && 'py-2']"
+      :ui="{
+        trailingIcon: 'text-dimmed',
+      }"
+      class="rounded-none w-full flex justify-between data-[state=open]:bg-elevated"
+    />
   </UDropdownMenu>
 </template>
