@@ -90,7 +90,7 @@ const items = ref([
       </template>
     </UDashboardSidebar>
     <section class="w-full flex flex-col">
-      <UDashboardPanel id="inbox-1" resizable>
+      <UDashboardPanel id="inbox-1" resizable class="relative">
         <template #header>
           <UDashboardNavbar title="Home">
             <template #leading>
