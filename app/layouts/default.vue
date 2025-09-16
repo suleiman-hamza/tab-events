@@ -36,7 +36,7 @@ const items = ref([
       },
       {
         label: 'Appearance',
-        to: '/app/user/notifications',
+        to: '/app/settings/appearance',
       },
     ],
   },
@@ -95,6 +95,10 @@ const items = ref([
           <UDashboardNavbar title="Home">
             <template #leading>
               <UDashboardSidebarCollapse />
+            </template>
+            <template #right>
+              <UButton icon="i-lucide-user" variant="soft" color="neutral" />
+              <UButton icon="i-lucide-bell" variant="soft" color="neutral" />
             </template>
           </UDashboardNavbar>
         </template>
