@@ -10,7 +10,7 @@ const items = ref([
   {
     label: 'Events',
     icon: 'i-lucide-calendar',
-    to: '/app/event/upcoming',
+    to: '/app/event',
   },
   {
     label: 'Organizations',
@@ -89,8 +89,8 @@ const items = ref([
         />
       </template>
     </UDashboardSidebar>
-    <section class="w-full">
-      <slot />
-    </section>
+    <!-- <UDashboardPanel> -->
+    <slot />
+    <!-- </UDashboardPanel> -->
   </UDashboardGroup>
 </template>
