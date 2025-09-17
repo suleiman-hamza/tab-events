@@ -18,9 +18,9 @@ const items = ref([
     to: '/app/organization',
   },
   {
-    label: 'Invites',
+    label: 'Discover',
     icon: 'i-lucide-mail',
-    to: '/app/invite',
+    to: '/app/discover',
   },
   {
     label: 'Settings',
@@ -89,23 +89,8 @@ const items = ref([
         />
       </template>
     </UDashboardSidebar>
-    <section class="w-full flex flex-col">
-      <UDashboardPanel id="inbox-1" resizable class="relative">
-        <template #header>
-          <UDashboardNavbar title="Home">
-            <template #leading>
-              <UDashboardSidebarCollapse />
-            </template>
-            <template #right>
-              <UButton icon="i-lucide-user" variant="soft" color="neutral" />
-              <UButton icon="i-lucide-bell" variant="soft" color="neutral" />
-            </template>
-          </UDashboardNavbar>
-        </template>
-        <template #body>
-          <slot />
-        </template>
-      </UDashboardPanel>
+    <section class="w-full">
+      <slot />
     </section>
   </UDashboardGroup>
 </template>
