@@ -10,7 +10,7 @@ const items = ref([
   {
     label: 'Events',
     icon: 'i-lucide-calendar',
-    to: '/app/event',
+    to: '/app/event/upcoming',
   },
   {
     label: 'Organizations',

@@ -9,15 +9,11 @@ const items = [
 
     {
       label: 'Upcoming',
-      value: 'all',
-      slot: 'all' as const,
-      description: 'Change your password here. After saving, you\'ll be logged out.',
+      to: '/app/event/upcoming',
     },
     {
       label: 'Past',
-      value: 'unread',
-      slot: 'unread' as const,
-      description: 'Make changes to your account here. Click save when you\'re done.',
+      to: '/app/event/past',
     },
   ],
 ]
@@ -38,6 +34,11 @@ const items = [
       <UDashboardToolbar>
         <UNavigationMenu :items="items" highlight class="flex-1" />
       </UDashboardToolbar>
+    </template>
+    <template #body>
+      <div class="flex flex-col gap-4 sm:gap-6 lg:gap-12 w-full lg:max-w-2xl mx-auto overflow-auto">
+        <NuxtPage />
+      </div>
     </template>
   </UDashboardPanel>
 </template>
