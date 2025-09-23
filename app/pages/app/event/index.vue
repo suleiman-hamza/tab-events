@@ -1,41 +1,11 @@
 <script setup lang="ts">
-const items = [
-  [
-    {
-      label: 'My Events',
-    },
-  ],
-  [
 
-    {
-      label: 'Upcoming',
-      to: '/app/event/upcoming',
-    },
-    {
-      label: 'Past',
-      to: '/app/event/past',
-    },
-  ],
-]
-
-const itemsTab = ref([
-  {
-    label: 'Account',
-    icon: 'i-lucide-user',
-    content: 'This is the account content.Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel reprehenderit quasi nemo officia laborum. Obcaecati, temporibus? Laudantium ad ullam magnam, nesciunt praesentium saepe, expedita veritatis sunt maiores a pariatur hic!Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel reprehenderit quasi nemo officia laborum. Obcaecati, temporibus? Laudantium ad ullam magnam, nesciunt praesentium saepe, expedita veritatis sunt maiores a pariatur hic!Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel reprehenderit quasi nemo officia laborum. Obcaecati, temporibus? Laudantium ad ullam magnam, nesciunt praesentium saepe, expedita veritatis sunt maiores a pariatur hic!Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel reprehenderit quasi nemo officia laborum. Obcaecati, temporibus? Laudantium ad ullam magnam, nesciunt praesentium saepe, expedita veritatis sunt maiores a pariatur hic!Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel reprehenderit quasi nemo officia laborum. Obcaecati, temporibus? Laudantium ad ullam magnam, nesciunt praesentium saepe, expedita veritatis sunt maiores a pariatur hic!Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel reprehenderit quasi nemo officia laborum. Obcaecati, temporibus? Laudantium ad ullam magnam, nesciunt praesentium saepe, expedita veritatis sunt maiores a pariatur hic!Lorem ipsum dolor sit amet consectetur adipisicing elit. 0Vel reprehenderit quasi nemo officia laborum. Obcaecati, temporibus? Laudantium ad ullam magnam, nesciunt praesentium saepe, expedita veritatis sunt maiores a pariatur hic!Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel reprehenderit quasi nemo officia laborum. Obcaecati, temporibus? Laudantium ad ullam magnam, nesciunt praesentium saepe, expedita veritatis sunt maiores a pariatur hic!Vel reprehenderit quasi nemo officia laborum. Obcaecati, temporibus? Laudantium ad ullam magnam, nesciunt praesentium saepe, expedita veritatis sunt maiores a pariatur hic!Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel reprehenderit quasi nemo officia laborum. Obcaecati, temporibus? Laudantium ad ullam magnam, nesciunt praesentium saepe, expedita veritatis sunt maiores a pariatur hic!Vel reprehenderit quasi nemo officia laborum. Obcaecati, temporibus? Laudantium ad ullam magnam, nesciunt praesentium saepe, expedita veritatis sunt maiores a pariatur hic!Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel reprehenderit quasi nemo officia laborum. Obcaecati, temporibus? Laudantium ad ullam magnam, nesciunt praesentium saepe, expedita veritatis sunt maiores a pariatur hic!Vel reprehenderit quasi nemo officia laborum. Obcaecati, temporibus? Laudantium ad ullam magnam, nesciunt praesentium saepe, expedita veritatis sunt maiores a pariatur hic!Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel reprehenderit quasi nemo officia laborum. Obcaecati, temporibus? Laudantium ad ullam magnam, nesciunt praesentium saepe, expedita veritatis sunt maiores a pariatur hic!',
-  },
-  {
-    label: 'Password',
-    icon: 'i-lucide-lock',
-    content: 'This is the password content.',
-  },
-])
 </script>
 
 <template>
   <UDashboardPanel>
     <template #header>
-      <UDashboardNavbar title="Event">
+      <UDashboardNavbar title="Events">
         <template #leading>
           <UDashboardSidebarCollapse />
         </template>
@@ -46,10 +16,14 @@ const itemsTab = ref([
       </UDashboardNavbar>
     </template>
     <template #body>
-      <UTabs
-        :items="itemsTab" class="w-full"
-        :ui="{ trigger: 'border border-red-500', list: 'border-2 border-amber-700 w-40 ml-auto' }"
-      />
+      <section class="h-screen flex gap-4 border justify-center items-center">
+        <div class="border flex flex-col items-center gap-2 p-4">
+          <Icon name="i-lucide-calendar" size="60" />
+          <h3>No Upcoming Events</h3>
+          <p>You have no upcoming events. Wanna host one?</p>
+          <UButton label="Create Event" icon="i-lucide-plus" color="info" />
+        </div>
+      </section>
     </template>
   </UDashboardPanel>
 </template>
