@@ -35,15 +35,12 @@ const items = ref([
         </template>
         <template #right>
           <UButton icon="i-lucide-bell" variant="soft" color="neutral" />
-          <UDropdownMenu :items="items">
-            <UButton icon="i-lucide-user" variant="soft" color="neutral" />
-          </UDropdownMenu>
-          <UPopover>
-            <UButton icon="i-lucide-user" variant="soft" color="neutral" />
+          <UPopover :content="{ align: 'end' }" :ui="{ content: 'bg-blue-950' }">
+            <UButton :avatar="{ alt: user?.name }" variant="soft" color="neutral" />
             <template #content>
               <section class="w-40">
                 <div class="flex gap-2 items-center p-3">
-                  <UAvatar />
+                  <UAvatar :alt="user?.name" />
                   <span class="truncate">
                     <h4>{{ user?.name }}</h4>
                     <h5 class="text-sm truncate">{{ user?.email }}</h5>
@@ -61,7 +58,7 @@ const items = ref([
     </template>
     <template #body>
       <section class="h-screen flex gap-4 border justify-center items-center">
-        <div class="flex flex-col items-center gap-2 p-4">
+        <div class="flex flex-col items-center gap-2 p-4 text-center">
           <Icon name="i-lucide-calendar" size="60" />
           <h3>No Upcoming Events</h3>
           <p>You have no upcoming events. Wanna host one?</p>
