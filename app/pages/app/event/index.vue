@@ -27,8 +27,8 @@ const items = ref([
 </script>
 
 <template>
-  <UDashboardPanel>
-    <template #header>
+  <!-- <UDashboardPanel> -->
+  <!-- <template #header>
       <UDashboardNavbar title="Events">
         <template #leading>
           <UDashboardSidebarCollapse />
@@ -55,16 +55,16 @@ const items = ref([
           </UPopover>
         </template>
       </UDashboardNavbar>
-    </template>
-    <template #body>
-      <section class="h-screen flex gap-4 border justify-center items-center">
-        <div class="flex flex-col items-center gap-2 p-4 text-center">
-          <Icon name="i-lucide-calendar" size="60" />
-          <h3>No Upcoming Events</h3>
-          <p>You have no upcoming events. Wanna host one?</p>
-          <UButton label="Create Event" icon="i-lucide-plus" color="info" />
-        </div>
-      </section>
-    </template>
-  </UDashboardPanel>
+    </template> -->
+  <!-- <template #body> -->
+  <section class="h-screen flex gap-4 border justify-center items-center">
+    <div class="flex flex-col items-center gap-2 p-4 text-center">
+      <Icon name="i-lucide-calendar" size="60" />
+      <h3>No Upcoming Events</h3>
+      <p>You have no upcoming events. Wanna host one?</p>
+      <UButton label="Create Event" icon="i-lucide-plus" color="info" />
+    </div>
+  </section>
+  <!-- </template> -->
+  <!-- </UDashboardPanel> -->
 </template>
