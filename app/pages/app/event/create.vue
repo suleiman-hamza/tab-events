@@ -52,7 +52,9 @@ const icon = computed(() => items.value.find(item => item.value === value.value)
       </UFormField>
       <UFormField>
         <UInput placeholder="Event Name" size="xl" :ui="{ base: 'rounded-none px-0' }" variant="none" class="px-0" />
-        <section class="border border-blue-600 p-2 flex justify-between">
+      </UFormField>
+      <UFormField class="flex flex-col gap-4 border">
+        <section class="border border-blue-600 p-2 flex justify-between mb-4">
           <div>
             <UStepper disabled orientation="vertical" color="neutral" size="sm" :items="timelineItems" :ui="{ indicator: '' }" />
           </div>
@@ -91,6 +93,7 @@ const icon = computed(() => items.value.find(item => item.value === value.value)
             </UPopover>
           </div>
         </section>
+        <AddLocation />
       </UFormField>
     </UForm>
     <h2 class="text-rose-500">
