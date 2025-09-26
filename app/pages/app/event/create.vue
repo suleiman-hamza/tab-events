@@ -15,15 +15,13 @@ const items = ref([
 
 <template>
   <section>
-    <UPageBody>
+    <UPageBody :ui="{ content: 'border' }">
       <UForm :state>
         <UFormField label="Name" name="name">
-          <UFileUpload />
+          <UFileUpload :ui="{ root: 'w-40 border-amber-400' }" />
         </UFormField>
         <UFormField>
-          <UDropdownMenu :items="items">
-            <UButton label="Public" />
-          </UDropdownMenu>
+          <USelect :items="items" leading-icon="i-lucide-globe" class="w-40" />
         </UFormField>
       </UForm>
     </UPageBody>
