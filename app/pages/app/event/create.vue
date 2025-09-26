@@ -26,6 +26,17 @@ const items = ref([
   },
 ] satisfies SelectItem[])
 
+const timelineItems = ref([
+  {
+    title: 'Start',
+    icon: 'i-lucide-check-circle',
+  },
+  {
+    title: 'End',
+    icon: 'i-lucide-flag',
+  },
+])
+
 const value = ref(items.value[0]?.value)
 
 const icon = computed(() => items.value.find(item => item.value === value.value)?.icon)
@@ -41,24 +52,45 @@ const icon = computed(() => items.value.find(item => item.value === value.value)
       </UFormField>
       <UFormField>
         <UInput placeholder="Event Name" size="xl" :ui="{ base: 'rounded-none px-0' }" variant="none" class="px-0" />
-        <div class="border border-blue-600 p-2">
-          <UPopover>
-            <UButton>
-              Start Date
-            </UButton>
-            <template #content>
-              <UCalendar v-model="state.date.start" />
-            </template>
-          </UPopover>
-          <UPopover>
-            <UButton>
-              End Date
-            </UButton>
-            <template #content>
-              <UCalendar v-model="state.date.end" />
-            </template>
-          </UPopover>
-        </div>
+        <section class="border border-blue-600 p-2 flex justify-between">
+          <div>
+            <UStepper disabled orientation="vertical" color="neutral" size="sm" :items="timelineItems" :ui="{ indicator: '' }" />
+          </div>
+          <div class="border grid grid-cols-2 gap-1">
+            <UPopover>
+              <UButton>
+                Start Date
+              </UButton>
+              <template #content>
+                <UCalendar v-model="state.date.start" />
+              </template>
+            </UPopover>
+            <UPopover>
+              <UButton>
+                Start Time
+              </UButton>
+              <template #content>
+                <UCalendar v-model="state.date.start" />
+              </template>
+            </UPopover>
+            <UPopover>
+              <UButton>
+                End Date
+              </UButton>
+              <template #content>
+                <UCalendar v-model="state.date.end" />
+              </template>
+            </UPopover>
+            <UPopover>
+              <UButton>
+                End Time
+              </UButton>
+              <template #content>
+                <UCalendar v-model="state.date.end" />
+              </template>
+            </UPopover>
+          </div>
+        </section>
       </UFormField>
     </UForm>
     <h2 class="text-rose-500">
