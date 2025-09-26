@@ -23,6 +23,9 @@ const items = ref([
         <UFormField>
           <USelect :items="items" leading-icon="i-lucide-globe" class="w-40" />
         </UFormField>
+        <UFormField>
+          <UInput placeholder="Event Name" size="xl" :ui="{ base: 'rounded-none px-0' }" variant="ghost" class="text-3xl px-0" />
+        </UFormField>
       </UForm>
     </UPageBody>
   </section>
