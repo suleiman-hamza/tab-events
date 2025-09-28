@@ -1,4 +1,4 @@
-// import process from 'node:process'
+import process from 'node:process'
 import tailwindcss from '@tailwindcss/vite'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   modules: ['@nuxt/eslint', '@nuxt/ui', 'reka-ui/nuxt'],
   css: ['~/assets/css/main.css'],
   runtimeConfig: {
-    resendKey: 're_SvM4wmeG_AiRyUf8WtmhDjdp9QXFgtMSo',
+    resendKey: process.env.RESEND_API_KEY,
   },
   eslint: {
     config: {

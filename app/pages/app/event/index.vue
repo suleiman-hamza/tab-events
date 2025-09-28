@@ -62,7 +62,7 @@ const items = ref([
       <Icon name="i-lucide-calendar" size="60" />
       <h3>No Upcoming Events</h3>
       <p>You have no upcoming events. Wanna host one?</p>
-      <UButton label="Create Event" icon="i-lucide-plus" color="info" />
+      <UButton label="Create Event" icon="i-lucide-plus" color="info" to="/app/event/create" />
     </div>
   </section>
   <!-- </template> -->
