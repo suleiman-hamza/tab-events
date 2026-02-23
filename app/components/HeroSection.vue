@@ -2,8 +2,5 @@
 </script>
 
 <template>
-  <Header />
-  <main>
-    <slot />
-  </main>
+  <h1>The Hero Section</h1>
 </template>
