@@ -6,13 +6,13 @@ const route = useRoute()
 const items = computed<NavigationMenuItem[]>(() => [
   {
     label: 'Docs',
-    to: '/docs/getting-started',
-    active: route.path.startsWith('/docs/getting-started'),
+    to: '/',
+    active: route.path.startsWith(''),
   },
   {
     label: 'Components',
-    to: '/docs/components',
-    active: route.path.startsWith('/docs/components'),
+    to: '/',
+    active: route.path.startsWith('/'),
   },
   {
     label: 'Login',
@@ -23,9 +23,9 @@ const items = computed<NavigationMenuItem[]>(() => [
 </script>
 
 <template>
-  <UHeader>
+  <UHeader mode="slideover">
     <template #title>
-      <NuxtLink to="/">
+      <NuxtLink to="/" class="border border-white border-dashed">
         <img src="/images/logo_svg.svg" alt="app logo svg" class="h-6 w-6">
       </NuxtLink>
     </template>
@@ -34,6 +34,11 @@ const items = computed<NavigationMenuItem[]>(() => [
 
     <template #right>
       <UColorModeButton />
+    </template>
+
+    <!-- Toggle menu/slideover -->
+    <template #body>
+      <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
     </template>
   </UHeader>
 </template>

@@ -1,8 +1,28 @@
 <script setup lang="ts">
+import type { ButtonProps } from '@nuxt/ui'
+
+const links = ref<ButtonProps[]>([
+  {
+    label: 'Get started',
+    to: '/docs/getting-started',
+    icon: 'i-lucide-square-play',
+  },
+  {
+    label: 'Learn more',
+    to: '/docs/getting-started/theme/design-system',
+    color: 'neutral',
+    variant: 'subtle',
+    trailingIcon: 'i-lucide-arrow-right',
+  },
+])
 </script>
 
 <template>
-  <section class="container border h-full p-4 min-h-[90vh] mx-auto">
-    <h1>The Better Way to Organize and Manage Events</h1>
-  </section>
+  <UPageHero title="Ultimate Vue UI library" description="A Nuxt/Vue-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications." :links="links">
+    <img
+      src="/images/image4.png"
+      alt="App screenshot"
+      class="rounded-lg shadow-2xl ring ring-default mx-auto"
+    >
+  </UPageHero>
 </template>

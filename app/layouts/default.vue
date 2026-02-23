@@ -3,7 +3,7 @@
 
 <template>
   <Header />
-  <main class="">
+  <UMain>
     <slot />
-  </main>
+  </UMain>
 </template>
