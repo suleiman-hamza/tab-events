@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <section class="container border h-full p-4 min-h-[90vh]">
+  <section class="container border h-full p-4 min-h-[90vh] mx-auto">
     <h1>The Better Way to Organize and Manage Events</h1>
   </section>
 </template>
