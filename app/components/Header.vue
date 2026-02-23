@@ -8,16 +8,22 @@
         <img src="/images/logo_svg.svg" alt="app logo svg" class="h-6 w-6">
       </NuxtLink>
 
-      <div class="flex gap-2 border">
+      <div class="sm:flex sm:gap-4 text-secondary hidden">
         <NuxtLink to="/">
           <span>Work</span>
         </NuxtLink>
         <NuxtLink to="/">
           <span>Contact</span>
         </NuxtLink>
-        <NuxtLink to="/">
-          <span>Book Demo</span>
+        <NuxtLink to="/auth">
+          <span>Login</span>
         </NuxtLink>
+      </div>
+
+      <div>
+        <UButton class="rounded-none" variant="outline">
+          <UIcon name="i-lucide-menu" />
+        </Ubutton>
       </div>
     </div>
   </nav>

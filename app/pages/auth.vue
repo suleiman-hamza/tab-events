@@ -122,11 +122,10 @@ async function onSignIn(payload: FormSubmitEvent<Schema>) {
 <template>
   <div class="flex flex-col items-center justify-center gap-4 p-4">
     <div class="flex items-center justify-center gap-2 mt-4 mb-4">
-      <UIcon name="i-lucide-lightbulb" class="size-5" />
-      <span class="text-amber-600 font-bold text-2xl">App Logo</span>
+      <img src="/images/logo_svg.svg" alt="app logo svg" class="h-10 w-10">
     </div>
 
-    <section class="relative p-4 border border-gray-300">
+    <section class="relative p-4 border border-amber-300/25">
       <!-- crossed div -->
       <span class="cross absolute -bottom-px -left-px size-px" />
       <span class="cross absolute -bottom-px -right-px size-px" />
