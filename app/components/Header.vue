@@ -5,19 +5,16 @@ const route = useRoute()
 
 const items = computed<NavigationMenuItem[]>(() => [
   {
-    label: 'Docs',
+    label: 'Home',
     to: '/',
-    active: route.path.startsWith(''),
   },
   {
-    label: 'Components',
-    to: '/',
-    active: route.path.startsWith('/'),
+    label: 'Events',
+    to: '/app/event',
   },
   {
-    label: 'Login',
+    label: 'Get Started',
     to: '/auth',
-    active: route.path.startsWith('/auth'),
   },
 ])
 </script>
@@ -25,8 +22,11 @@ const items = computed<NavigationMenuItem[]>(() => [
 <template>
   <UHeader mode="slideover">
     <template #title>
-      <NuxtLink to="/" class="border border-white border-dashed">
-        <img src="/images/logo_svg.svg" alt="app logo svg" class="h-6 w-6">
+      <NuxtLink to="/" class="border border-white border-dashed flex gap-4 items-center">
+        <img src="/images/logo_svg.svg" alt="app logo svg" class="h-6 w-6 text-white">
+        <h1 class="border">
+          alto
+        </h1>
       </NuxtLink>
     </template>
 
