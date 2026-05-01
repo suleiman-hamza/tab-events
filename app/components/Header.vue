@@ -20,17 +20,15 @@ const items = computed<NavigationMenuItem[]>(() => [
 </script>
 
 <template>
-  <UHeader mode="slideover">
+  <UHeader mode="slideover" :ui="{ root: 'border-indigo-400', title: 'items-center' }">
     <template #title>
-      <NuxtLink to="/" class="border border-white border-dashed flex gap-4 items-center">
-        <img src="/images/logo_svg.svg" alt="app logo svg" class="h-6 w-6 text-white">
-        <h1 class="border">
-          alto
-        </h1>
-      </NuxtLink>
+      <Logo />
+      <span class="">
+        alto
+      </span>
     </template>
 
-    <UNavigationMenu :items="items" />
+    <UNavigationMenu :items="items" variant="link" />
 
     <template #right>
       <UColorModeButton />

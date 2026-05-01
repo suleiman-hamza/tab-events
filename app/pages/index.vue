@@ -30,13 +30,13 @@ const cards = ref([
 
 <template>
   <HeroSection />
-  <UPageSection title="Features" description="Discover the powerful features of our UI library." :ui="{ body: 'border' }">
+  <UPageSection title="Features" description="Discover the powerful features of our UI library." :ui="{ body: '' }">
     <template #body>
       <UPageGrid>
         <UPageCard
           v-for="(card, index) in cards"
           :key="index"
-          :ui="{ root: card.image ? 'bg-[url(/images/logo_svg.svg)] bg-no-repeat bg-top-right bg-size-[100px]' : '' }"
+          :ui="{ root: 'rounded-none border' }"
         >
           <template #default>
             <div class="">

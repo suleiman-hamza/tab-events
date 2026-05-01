@@ -3,13 +3,8 @@ import type { ButtonProps } from '@nuxt/ui'
 
 const links = ref<ButtonProps[]>([
   {
-    label: 'Get started',
-    to: '/docs/getting-started',
-    icon: 'i-lucide-square-play',
-  },
-  {
-    label: 'Learn more',
-    to: '/docs/getting-started/theme/design-system',
+    label: 'Try it for free',
+    to: '/auth',
     color: 'neutral',
     variant: 'subtle',
     trailingIcon: 'i-lucide-arrow-right',
@@ -18,7 +13,7 @@ const links = ref<ButtonProps[]>([
 </script>
 
 <template>
-  <UPageHero title="Ultimate Vue UI library" description="A Nuxt/Vue-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications." :links="links">
+  <UPageHero title="The Smarter Way to Manage Events" description="A Nuxt/Vue-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications." :links="links">
     <img
       src="/images/image4.png"
       alt="App screenshot"

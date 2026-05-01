@@ -120,12 +120,12 @@ async function onSignIn(payload: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center gap-4 p-4">
+  <div class="flex flex-col items-center justify-center gap-4 p-4 mb-4">
     <div class="flex items-center justify-center gap-2 mt-4 mb-4">
-      <img src="/images/logo_svg.svg" alt="app logo svg" class="h-10 w-10">
+      <Logo class="w-20 h-20 shadow-md shadow-indigo-300" />
     </div>
 
-    <section class="relative p-4 border border-amber-300/25">
+    <section class="relative p-4 border border-indigo-300/50">
       <!-- crossed div -->
       <span class="cross absolute -bottom-px -left-px size-px" />
       <span class="cross absolute -bottom-px -right-px size-px" />
@@ -145,13 +145,13 @@ async function onSignIn(payload: FormSubmitEvent<Schema>) {
             <UFormField label="Email" name="email">
               <UInput
                 v-model="state.email" class="w-full !rounded-none ring-0 shadow-none inset-ring-0"
-                trailing-icon="i-lucide-at-sign" placeholder="Enter your email"
+                trailing-icon="i-lucide-at-sign" placeholder=""
               />
             </UFormField>
-            <UFormField label="password" name="password">
+            <UFormField label="Password" name="password">
               <UInput
                 v-model="state.password" type="password" class="w-full !rounded-none"
-                trailing-icon="i-lucide-lock" placeholder="Enter your password"
+                trailing-icon="i-lucide-lock" placeholder=""
               />
             </UFormField>
 
@@ -174,19 +174,19 @@ async function onSignIn(payload: FormSubmitEvent<Schema>) {
             <UFormField label="Email" name="email">
               <UInput
                 v-model="state.email" class="w-full !rounded-none" trailing-icon="i-lucide-at-sign"
-                placeholder="Enter your email"
+                placeholder=""
               />
             </UFormField>
             <UFormField label="password" name="password">
               <UInput
                 v-model="state.password" type="password" class="w-full !rounded-none border-0"
-                trailing-icon="i-lucide-lock" placeholder="Enter your password"
+                trailing-icon="i-lucide-lock" placeholder=""
               />
             </UFormField>
             <UFormField label="Name" name="name">
               <UInput
                 v-model="state.name" class="w-full rounded-none border-0" trailing-icon="i-lucide-at-profile"
-                placeholder="Enter Fullname"
+                placeholder=""
               />
             </UFormField>
 

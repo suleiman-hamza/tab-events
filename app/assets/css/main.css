@@ -1,6 +1,19 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
+:root {
+  --ui-container: var(--container-6xl);
+  --ui-primary: black;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--ui-bg-accented) transparent;
+}
+
+.dark {
+  --ui-bg: #020202;
+  --ui-primary: white;
+}
+
 .cross {
   @apply before:absolute after:absolute;
   @apply before:top-[-4px] before:bg-inverted before:content-[''] before:w-[1px] before:h-[9px];
