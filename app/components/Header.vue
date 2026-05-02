@@ -20,7 +20,7 @@ const items = computed<NavigationMenuItem[]>(() => [
 </script>
 
 <template>
-  <UHeader mode="slideover" :ui="{ root: 'border-indigo-400', title: 'items-center' }">
+  <UHeader mode="slideover" :ui="{ root: 'border-secondary-500', title: 'items-center' }">
     <template #title>
       <Logo />
       <span class="">

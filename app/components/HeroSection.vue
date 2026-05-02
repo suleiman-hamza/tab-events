@@ -3,7 +3,7 @@ import type { ButtonProps } from '@nuxt/ui'
 
 const links = ref<ButtonProps[]>([
   {
-    label: 'Try it for free',
+    label: 'Create Your Event',
     to: '/auth',
     color: 'neutral',
     variant: 'subtle',
@@ -13,7 +13,7 @@ const links = ref<ButtonProps[]>([
 </script>
 
 <template>
-  <UPageHero title="The Smarter Way to Manage Events" description="A Nuxt/Vue-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications." :links="links">
+  <UPageHero title="Where Vision Meets Venue." description="The all-in-one platform to create, manage, and scale your events. From custom booking links to instant ticket generation, Alto handles the logistics so you can focus on the experience." :links="links">
     <img
       src="/images/image4.png"
       alt="App screenshot"
