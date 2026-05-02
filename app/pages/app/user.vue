@@ -3,6 +3,7 @@ const { user, session } = useAuth()
 const { organizations } = useOrgs()
 
 definePageMeta({
+  layout: 'dashboard',
   middleware: ['auth'],
 })
 </script>

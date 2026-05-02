@@ -1,4 +1,9 @@
 <script setup lang="ts">
+definePageMeta({
+  layout: 'dashboard',
+  middleware: ['auth'],
+})
+
 const { user } = useAuth()
 const items = ref([
   [
